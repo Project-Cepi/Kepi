@@ -1,7 +1,7 @@
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.4.10"
-    kotlin("plugin.serialization") version "1.4.10"
+    id("org.jetbrains.kotlin.jvm") version "1.4.21"
+    kotlin("plugin.serialization") version "1.4.20"
 
     // Apply the application plugin to add support for building a jar
     java
@@ -10,6 +10,7 @@ plugins {
 repositories {
     // Use jcenter for resolving dependencies.
     jcenter()
+    mavenCentral()
 
     // Use mavenCentral
     maven(url = "https://repo1.maven.org/maven2/")
@@ -29,14 +30,20 @@ dependencies {
     // Use the Kotlin reflect library.
     implementation(kotlin("reflect"))
 
-    // Compile Minestom into project
-    implementation("com.github.Minestom:Minestom:-SNAPSHOT")
+    // Use the JUpiter test library.
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
 
-    // OkHttp
+    // Compile Minestom into project
+    implementation("com.github.Minestom:Minestom:fcc5bc4381")
+
+    // Add OkHTTP3
     implementation("com.squareup.okhttp3", "okhttp", "4.9.0")
 
-    // import kotlinx serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+    // Use kotlinx serialization
+    implementation("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.0.1")
+
+    // implement KStom
+    implementation("com.github.Project-Cepi:KStom:main-SNAPSHOT")
 }
 
 tasks.withType<Test> {
