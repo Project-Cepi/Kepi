@@ -48,7 +48,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.0.1")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:main-SNAPSHOT")
+    compileOnly("com.github.Project-Cepi:KStom:6d054839bf")
 }
 
 tasks.withType<Test> {
@@ -63,7 +63,7 @@ configurations {
 
 tasks {
     named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
-        archiveBaseName.set("item")
+        archiveBaseName.set("kepi")
         mergeServiceFiles()
         minimize()
 
