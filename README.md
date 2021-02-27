@@ -1,2 +1,2 @@
-# ExampleExtension
- An example extension for Minestom based off of Sabre/kotlin libs.
+# Kepi
+Service manager and common library for Project Cepi codes
