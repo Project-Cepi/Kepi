@@ -1,15 +1,33 @@
 package world.cepi.kepi
 
-import net.minestom.server.extensions.Extension;
+import world.cepi.Service
+import kotlin.reflect.KClass
 
-class Kepi : Extension() {
+/**
+ * Convenient access to Kepi's [ServiceProvider]
+ */
+object Kepi : ServiceProvider {
 
-    override fun initialize() {
-        logger.info("[Kepi] has been enabled!")
+    internal lateinit var provider: ServiceProvider
+
+    override fun <S : Service> isImplemented(service: KClass<S>): Boolean {
+        return provider.isImplemented(service)
     }
 
-    override fun terminate() {
-        logger.info("[Kepi] has been disabled!")
+    override fun <S : Service> fetchService(service: KClass<S>): S {
+        return provider.fetchService(service)
     }
+
+    override fun <S : Service> getImplementations(service: KClass<S>): ImplementationMapper<S> {
+        return provider.getImplementations(service)
+    }
+
+    override fun <S : Service> implementService(service: KClass<S>, implementation: S): Boolean {
+        return provider.implementService(service, implementation)
+    }
+
+    override val version: String = provider.version
+
+    override val implementationName: String = provider.implementationName
 
 }

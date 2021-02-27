@@ -10,6 +10,7 @@ import net.minestom.server.entity.Player
  * @param message The origin message, usually grabbed from the list of translations
  * @param params The replacers, usually used to replace a placeholder in a translation message
  */
+@Deprecated("Old Kepi functionality")
 fun CommandSender.sendFormattedMessage(message: String, vararg params: String = arrayOf("")) {
 
     var parsedMessage = message
