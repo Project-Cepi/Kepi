@@ -10,46 +10,37 @@ import net.minestom.server.utils.BlockPosition
 /**
  * Represents a 3-dimensional non-uniform region.
  * (Though it can be uniform, if you define it like so.)
- *
- * @since RegionAPI 1.0
  */
 interface Region : DataContainer {
 
     /**
-     * @return The unique name of this region.
-     *
-     * @since RegionAPI 1.0
+     * The name of this region
      */
-    fun getName(): String
+    val name: String
 
     /**
-     * @return The [RegionPool] in which this region
-     * resided in. Or null, if this region has been removed.
+     * The [RegionPool] that contains/manages this region.
      *
-     * @since RegionAPI 1.0
+     * If the region has been deleted, the value is undefined.
      */
-    fun getPool(): RegionPool
+    val pool: RegionPool
 
     /**
      * @return An unmodifiable collection of worlds (Minestom [Instance]s),
      * that contain at least some part of this region.
-     *
-     * @since RegionAPI 1.0
      */
     fun getWorlds(): Collection<Instance>
 
     /**
      * @return True, if this region contains at least one block.
      * (Has any size.) False otherwise.
-     *
-     * @since RegionAPI 1.0
      */
     fun isDefined(): Boolean
 
     /**
-     * @return The volume of this region in blocks.
+     * Calculates the volume of this region.
      *
-     * @since RegionAPI 1.0
+     * @return The volume of this region in blocks.
      */
     fun getVolume(): Int
 
@@ -61,8 +52,6 @@ interface Region : DataContainer {
      * @param world, the Instance
      *
      * @return True, only if the block is inside this region.
-     *
-     * @since RegionAPI 1.0
      */
     fun isInside(pos: BlockPosition, world: Instance): Boolean
 
@@ -75,8 +64,6 @@ interface Region : DataContainer {
      *
      * @return The amount of blocks that were added in total. This can be less than the
      * actual selection, if part of the selected area was already in the region.
-     *
-     * @since RegionAPI 1.0
      */
     fun addBlocks(pos1: BlockPosition, pos2: BlockPosition, world: Instance): Int
 
@@ -89,8 +76,6 @@ interface Region : DataContainer {
      *
      * @return The amount of blocks that were removed in total. This can be less than the
      * actual selection, if the selected area was not entirely inside the region.
-     *
-     * @since RegionAPI 1.0
      */
     fun removeBlocks(pos1: BlockPosition, pos2: BlockPosition, world: Instance): Int
 
@@ -103,8 +88,6 @@ interface Region : DataContainer {
      * @param world The [Instance] where the chunk resides.
      *
      * @return Iterator for blocks inside this region in the chunk.
-     *
-     * @since RegionAPI 1.0
      */
     fun iterateChunk(chunkX: Int, chunkZ: Int, world: Instance) : Iterator<BlockPosition>
 
@@ -113,8 +96,6 @@ interface Region : DataContainer {
      * currently inside this region.
      *
      * @return Collection of players inside this region
-     *
-     * @since RegionAPI 1.0
      */
     fun getPlayers(): MutableCollection<Player>
 
@@ -123,8 +104,6 @@ interface Region : DataContainer {
      * currently inside this region.
      *
      * @return Collection of entities inside this region
-     *
-     * @since RegionAPI 1.0
      */
     fun getEntities(): MutableCollection<Entity>
 
@@ -136,8 +115,6 @@ interface Region : DataContainer {
      * @param types The given entity types. Null not allowed as an member.
      *
      * @return Collection of entities inside this region with a given type
-     *
-     * @since RegionAPI 1.0
      */
     fun getEntities(vararg types: EntityType): MutableCollection<Entity>
 

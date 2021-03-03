@@ -6,18 +6,14 @@ import world.cepi.Service
 
 /**
  * Represents a RegionAPI implementation.
- *
- * Current version: 1.0
- *
- * @since RegionAPI 1.0
  */
 interface RegionProvider : Service {
 
     /**
-     * @return An unmodifiable collection representation
-     * of all the [RegionPool]s managed by this provider.
+     * A collection of all the [RegionPool]s managed by
+     * this provider
      */
-    fun getPools(): Collection<RegionPool>
+    val pools: Collection<RegionPool>
 
     /**
      * Gets the [RegionPool] with the specified name,
