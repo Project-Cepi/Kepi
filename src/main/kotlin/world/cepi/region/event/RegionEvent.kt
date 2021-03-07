@@ -8,8 +8,8 @@ import world.cepi.region.Region
 interface RegionEvent {
 
     /**
-     * @return The [Region] in question.
+     * The [Region] in question.
      */
-    fun getRegion(): Region
+    val region: Region
 
 }

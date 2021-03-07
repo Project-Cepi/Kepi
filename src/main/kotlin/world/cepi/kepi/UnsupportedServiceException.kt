@@ -5,5 +5,4 @@ package world.cepi.kepi
  *
  * @param message The message used as the reason for this exception
  */
-class UnsupportedServiceException(override val message: String) : RuntimeException(message) {
-}
+class UnsupportedServiceException(override val message: String) : RuntimeException(message)

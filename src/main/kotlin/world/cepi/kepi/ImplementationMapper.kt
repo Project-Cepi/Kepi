@@ -7,7 +7,7 @@ import world.cepi.Service
  *
  * @param S The [Service]
  */
-interface ImplementationMapper<S : Service> {
+interface ImplementationMapper {
 
     /**
      * Checks if this mapper has any implementations.
@@ -17,9 +17,8 @@ interface ImplementationMapper<S : Service> {
      *
      * @return True, if this mapper is empty, false otherwise.
      */
-    fun isEmpty(): Boolean {
-        return size() == 0
-    }
+    val empty: Boolean
+        get() = size == 0
 
     /**
      * The amount of implementations this mapper contains for
@@ -33,9 +32,9 @@ interface ImplementationMapper<S : Service> {
      *
      * Null, if there is no implementations in this mapper.
      *
-     * @see [isEmpty]
+     * @see [empty]
      */
-    val primary: S?
+    val primary: Service?
 
     /**
      * A map representation of the implementations in this mapper,
@@ -43,12 +42,14 @@ interface ImplementationMapper<S : Service> {
      * [Service.implementationName] is the key and the implementation
      * itself is the value.
      */
-    val asMap: Map<String, S>
+    val asMap: Map<String, Service>
 
     /**
      * A collection representation of the implementations in this
      * mapper, where the values are the implementations.
      */
-    val asCollection: Collection<S>
+    val asCollection: Collection<Service>
+
+    fun add(implementation: Service): Boolean
 
 }

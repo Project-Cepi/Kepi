@@ -18,7 +18,7 @@ interface ServiceProvider : Service {
      *
      * @return True, if there is an implementation available, false otherwise.
      */
-    fun <S : Service> isImplemented(service: KClass<S>): Boolean
+    fun has(service: KClass<out Service>): Boolean
 
     /**
      * Fetches the primary implementation for the given service.
@@ -30,7 +30,7 @@ interface ServiceProvider : Service {
      * @throws UnsupportedServiceException If implementation for the
      * service is not available.
      */
-    fun <S : Service> fetchService(service: KClass<S>): S
+    fun fetch(service: KClass<out Service>): Service
 
     /**
      * Gets all the implementations for the given service. The collection of
@@ -41,7 +41,7 @@ interface ServiceProvider : Service {
      *
      * @return The implementations for the service in [ImplementationMapper] form.
      */
-    fun <S : Service> getImplementations(service: KClass<S>): ImplementationMapper<S>
+    fun getImplementations(service: KClass<out Service>): ImplementationMapper
 
     /**
      * Adds a new implementation for the given service.
@@ -55,6 +55,6 @@ interface ServiceProvider : Service {
      * @throws IllegalStateException If there already is an implementation for
      * the service with the same name as this.
      */
-    fun <S : Service> implementService(service: KClass<S>, implementation: S): Boolean
+    fun implementService(service: KClass<out Service>, implementation: Service): Boolean
 
 }

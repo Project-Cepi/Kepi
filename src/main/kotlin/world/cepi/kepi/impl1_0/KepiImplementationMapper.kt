@@ -3,14 +3,13 @@ package world.cepi.kepi.impl1_0
 import world.cepi.Service
 import world.cepi.kepi.ImplementationMapper
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.reflect.KClass
 
-class KepiImplementationMapper<S : Service>(private val serviceName: String) : ImplementationMapper<S> {
+class KepiImplementationMapper(private val serviceName: String) : ImplementationMapper {
 
-    private var primaryImplementation: S? = null
-    private val implementationMap: MutableMap<String, S> = ConcurrentHashMap()
+    private var primaryImplementation: Service? = null
+    private val implementationMap: MutableMap<String, Service> = ConcurrentHashMap()
 
-    fun addImplementation(implementation: S): Boolean {
+    override fun add(implementation: Service): Boolean {
         if (implementationMap[implementation.implementationName] != null) {
             throw IllegalStateException(
                 "duplicate implementation ${implementation.implementationName} for service $serviceName"
@@ -19,24 +18,24 @@ class KepiImplementationMapper<S : Service>(private val serviceName: String) : I
 
         implementationMap[implementation.implementationName] = implementation
 
-        if (primaryImplementation == null) {
+        return if (primaryImplementation == null) {
             primaryImplementation = implementation
-            return true
+            true
         } else {
-            return false
+            false
         }
     }
 
     override val size: Int
         get() = implementationMap.size
 
-    override val primary: S?
+    override val primary: Service?
         get() = primaryImplementation
 
-    override val asMap: Map<String, S>
+    override val asMap: Map<String, Service>
         get() = implementationMap
 
-    override val asCollection: Collection<S>
+    override val asCollection: Collection<Service>
         get() = implementationMap.values
 
 }

@@ -8,12 +8,6 @@ import world.cepi.region.Region
 /**
  * Represents an event that is called when player attempts to enter a [Region].
  */
-class PlayerEnterRegionEvent(player: Player, private val region: Region, positionInsideRegion: Position) : PlayerMoveEvent(player, positionInsideRegion), RegionEvent {
+class PlayerEnterRegionEvent(player: Player, override val region: Region, positionInsideRegion: Position) : PlayerMoveEvent(player, positionInsideRegion), RegionEvent {
 
-    /**
-     * @return The [Region] that is being entered.
-     */
-    override fun getRegion(): Region {
-        return region
-    }
 }
