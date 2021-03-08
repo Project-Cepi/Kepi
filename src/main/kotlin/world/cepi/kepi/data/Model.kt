@@ -28,6 +28,9 @@ interface Model<T> {
         }
     }
 
+    /**
+     * Represents where this Model is located.
+     */
     val dataNamespace: DataNamespaceForge
 
     /**
@@ -39,5 +42,12 @@ interface Model<T> {
      * Reccomended to use kotlinx.serialization.
      */
     fun asData(item: T): Pair<String, String>
+
+    /**
+     * Represents if all data returned from [asData] will have the same ID.
+     * Used for optimization purposes.
+     */
+    val isSingleton: Boolean
+        get() = false
 
 }
