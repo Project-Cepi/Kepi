@@ -23,6 +23,9 @@ import kotlinx.serialization.json.JsonBuilder
 interface Model<T> {
 
     companion object {
+
+        const val default = "default"
+
         val jsonParser = Json {
 
         }
@@ -32,6 +35,14 @@ interface Model<T> {
      * Represents where this Model is located.
      */
     val dataNamespace: DataNamespaceForge
+
+    /**
+     * Represents the model this model depends on, for optimization purposes.
+     * EX, if there is a LevelModel for a Player,
+     * depend on a PlayerModel.
+     */
+    val dependsOn: Model<*>?
+        get() = null
 
     /**
      * Turns object T into data

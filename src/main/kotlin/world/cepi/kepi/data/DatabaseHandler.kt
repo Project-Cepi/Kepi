@@ -11,9 +11,8 @@ interface DatabaseHandler {
      * @param namespace The namespace to put the [data] at.
      * @param id The ID of the object.
      * @param data The data as JSON (string)
-     * @param childSpace The namespace in the [id]. Meant to stop namespace cloning.
      */
-    fun put(namespace: DataNamespaceForge, id: String, data: String, childSpace: DataNamespaceForge = DataNamespaceForge()): Boolean
+    fun put(namespace: DataNamespaceForge, id: String, data: String): Boolean
 
     /**
      * Erase data from a namespace + id
@@ -22,6 +21,6 @@ interface DatabaseHandler {
      * @param id The ID of the object.
      * @param childSpace The namespace in the [id]. Meant to stop namespace cloning.
      */
-    fun erase(namespace: DataNamespaceForge, id: String, childSpace: DataNamespaceForge = DataNamespaceForge()): Boolean
+    fun erase(namespace: DataNamespaceForge, id: String): Boolean
 
 }
