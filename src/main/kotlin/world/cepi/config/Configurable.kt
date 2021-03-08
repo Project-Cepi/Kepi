@@ -17,7 +17,7 @@ interface Configurable<V> {
      *
      * @return The current value of this configurable
      */
-    fun get(): V
+    operator fun invoke(): V
 
     /**
      * Sets a [BiConsumer] callback to be executed whenever the
