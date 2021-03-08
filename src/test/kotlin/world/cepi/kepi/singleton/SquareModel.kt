@@ -8,7 +8,7 @@ import world.cepi.kepi.data.Model.Companion.jsonParser
 /**
  * Singleton model -- storing a `Square` would only store this one instance of the square at the same ID.
  */
-class SquareModel : Model<Square> {
+object SquareModel : Model<Square> {
 
     override val dataNamespace: DataNamespaceForge = DataNamespaceForge("shape", "sqare")
 

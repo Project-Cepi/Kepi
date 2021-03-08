@@ -25,7 +25,7 @@ open class DataNamespaceForge(
         DataNamespaceForge(keys + key)
 
     override fun toString(): String {
-        return "${keys.joinToString(".")}::"
+        return keys.joinToString(".")
     }
 
 }

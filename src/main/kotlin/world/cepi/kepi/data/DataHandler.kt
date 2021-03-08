@@ -2,7 +2,14 @@ package world.cepi.kepi.data
 
 object DataHandler {
 
+    /**
+     * Represents the [DatabaseHandler] this [DataHandler] singleton uses
+     */
     internal var databaseHandler: DatabaseHandler? = null
+
+    /**
+     * In memory list of all the models.
+     */
     val models: MutableSet<Model<*>> = mutableSetOf()
 
     /**
