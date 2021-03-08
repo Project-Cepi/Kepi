@@ -15,14 +15,14 @@ object DataHandler {
      * @param model The model object to use.
      * @param data The data as JSON (string)
      */
-    fun <T> put(model: Model<T>, item: T, id: String): Boolean {
+    fun <T> put(model: Model<T>, item: T, id: ID): Boolean {
 
         val data = model.asData(item)
 
         return databaseHandler.put(model.dataNamespace, id = data.first, data = data.second)
     }
 
-    fun <T> erase(model: Model<T>, id: String): Boolean {
+    fun <T> erase(model: Model<T>, id: ID): Boolean {
 
         return databaseHandler.erase(model.dataNamespace, id)
 
