@@ -1,4 +1,4 @@
-package world.cepi.kepi.singleton
+package world.cepi.kepi.model.singleton
 
 import kotlinx.serialization.Serializable
 
