@@ -1,5 +1,5 @@
 {
-  "entrypoint": "world.cepi.example.Kepi",
+  "entrypoint": "world.cepi.kepi.Kepi",
   "name": "Kepi",
   "version": "1.0.0"
 }
