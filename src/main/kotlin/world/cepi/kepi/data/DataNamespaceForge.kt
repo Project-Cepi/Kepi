@@ -19,6 +19,8 @@ open class DataNamespaceForge(
     val keys: List<String> = listOf()
 ) {
 
+    constructor(vararg keys: String): this(keys.toList())
+
     operator fun plus(key: String): DataNamespaceForge =
         DataNamespaceForge(keys + key)
 

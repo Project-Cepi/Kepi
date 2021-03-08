@@ -12,7 +12,7 @@ interface DatabaseHandler {
      * @param id The ID of the object.
      * @param data The data as JSON (string)
      */
-    fun put(forge: DataNamespaceForge, id: String, data: String): Boolean
+    fun put(forge: DataNamespaceForge, id: String, data: String, subForge: DataNamespaceForge = DataNamespaceForge()): Boolean
 
     /**
      * Erase data from a namespace + id

@@ -1,5 +1,8 @@
 package world.cepi.kepi.data
 
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonBuilder
+
 /**
  * Represents a storable object, anywhere.
  *
@@ -18,6 +21,12 @@ package world.cepi.kepi.data
  *
  */
 interface Model<T> {
+
+    companion object {
+        val jsonParser = Json {
+
+        }
+    }
 
     val dataNamespace: DataNamespaceForge
 
