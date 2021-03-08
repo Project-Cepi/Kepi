@@ -81,3 +81,8 @@ java {
 }
 
 tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }
+val compileKotlin: KotlinCompile by tasks
+
+compileKotlin.kotlinOptions {
+    freeCompilerArgs = listOf("-Xinline-classes")
+}
