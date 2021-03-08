@@ -29,3 +29,5 @@ open class DataNamespaceForge(
     }
 
 }
+
+fun String.asNamespace() = DataNamespaceForge(this.split("."))

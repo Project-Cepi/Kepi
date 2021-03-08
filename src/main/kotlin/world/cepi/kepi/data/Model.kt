@@ -25,6 +25,7 @@ interface Model<T> {
     companion object {
 
         const val default = "default"
+        val defaultNamespace = default.asNamespace()
 
         val jsonParser = Json {
 
