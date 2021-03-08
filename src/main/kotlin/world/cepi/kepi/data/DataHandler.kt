@@ -1,11 +1,13 @@
 package world.cepi.kepi.data
 
+import world.cepi.kepi.data.databaseimpls.MemoryDatabase
+
 object DataHandler {
 
     /**
      * Represents the [DatabaseHandler] this [DataHandler] singleton uses
      */
-    internal var databaseHandler: DatabaseHandler? = null
+    internal var databaseHandler: DatabaseHandler = MemoryDatabase()
 
     /**
      * In memory list of all the models.
