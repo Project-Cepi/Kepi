@@ -16,7 +16,7 @@ class Help(vararg val messages: String, name: String = "help") : Command(name) {
     }
 
     init {
-        setDefaultExecutor { sender, args ->
+        setDefaultExecutor { sender, _ ->
             sender.sendMessage("$DARK_GRAY$head${arm.repeat(armLength)}")
 
             messages.forEach {
