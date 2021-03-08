@@ -14,13 +14,21 @@ package world.cepi.kepi.data
  * mob and registry,
  * and a hanging dot where an id would go.
  *
+ * HIGHLY reccomended to use a kotlin Object
+ *
  */
-interface Model {
+interface Model<T> {
 
     val dataNamespace: DataNamespaceForge
 
-    fun toJSON() {
-
-    }
+    /**
+     * Turns object T into data
+     *
+     * @param item The generic to turn into data
+     *
+     * @return A pair of ID to valid JSON data (json will be parsed to whatever)
+     * Reccomended to use kotlinx.serialization.
+     */
+    fun asData(item: T): Pair<String, String>
 
 }
