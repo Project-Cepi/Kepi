@@ -10,11 +10,6 @@ object DataHandler {
     internal var databaseHandler: DatabaseHandler = MemoryDatabase()
 
     /**
-     * In memory list of all the models.
-     */
-    val models: MutableSet<Model<*>> = mutableSetOf()
-
-    /**
      * Puts data at a namespace + id
      *
      * @param model The model object to use.
