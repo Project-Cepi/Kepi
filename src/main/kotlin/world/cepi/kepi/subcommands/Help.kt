@@ -1,4 +1,4 @@
-package world.cepi.subcommands
+package world.cepi.kepi.subcommands
 
 import net.minestom.server.chat.ChatColor.*
 import net.minestom.server.command.builder.Command

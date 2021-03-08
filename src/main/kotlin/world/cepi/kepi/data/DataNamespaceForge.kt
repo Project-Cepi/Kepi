@@ -1,4 +1,4 @@
-package world.cepi.data
+package world.cepi.kepi.data
 
 /**
  * Represents a data namespace, its "string" format is in the format of a Skript variable.

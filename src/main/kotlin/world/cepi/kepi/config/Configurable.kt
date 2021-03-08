@@ -1,4 +1,4 @@
-package world.cepi.config
+package world.cepi.kepi.config
 
 import java.util.function.BiConsumer
 

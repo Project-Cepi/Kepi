@@ -1,4 +1,4 @@
-package world.cepi.messages
+package world.cepi.kepi.messages
 
 import net.minestom.server.chat.ChatColor
 import net.minestom.server.command.CommandSender

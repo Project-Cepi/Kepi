@@ -1,6 +1,4 @@
-package world.cepi.data
-
-import kotlinx.serialization.Serializable
+package world.cepi.kepi.data
 
 /**
  * Represents a storable object, anywhere.
