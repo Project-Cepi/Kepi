@@ -24,7 +24,7 @@ object DataHandler {
 
         val data = model.asData(item)
 
-        return databaseHandler?.put(model.dataNamespace, id = data.first, data = data.second) ?: false
+        return databaseHandler.put(model.dataNamespace, id = data.first, data = data.second) ?: false
     }
 
 }
