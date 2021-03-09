@@ -12,7 +12,7 @@ interface DatabaseHandler {
      * @param id The ID of the object.
      * @param data The data as JSON (string)
      */
-    fun put(namespace: DataNamespaceForge, id: ID, data: String): Boolean
+    fun put(namespace: DataNamespaceForge, childNamespace: DataNamespaceForge, id: ID, data: String): Boolean
 
     /**
      * Erase data from a namespace + id
@@ -21,6 +21,6 @@ interface DatabaseHandler {
      * @param id The ID of the object.
      * @param childSpace The namespace in the [id]. Meant to stop namespace cloning.
      */
-    fun erase(namespace: DataNamespaceForge, id: ID): Boolean
+    fun erase(namespace: DataNamespaceForge, childNamespace: DataNamespaceForge, id: ID): Boolean
 
 }

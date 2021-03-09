@@ -1,6 +1,6 @@
 package world.cepi.kepi.data
 
-import world.cepi.kepi.data.databaseimpls.MemoryDatabase
+import world.cepi.kepi.data.databases.MemoryDatabase
 
 object DataHandler {
 
@@ -19,12 +19,12 @@ object DataHandler {
 
         val data = model.asData(item)
 
-        return databaseHandler.put(model.dataNamespace, id = data.first, data = data.second)
+        return databaseHandler.put(model.dataNamespace, model.dependsOn.dataNamespace, id = data.first, data = data.second)
     }
 
     fun <T> erase(model: Model<T>, id: ID): Boolean {
 
-        return databaseHandler.erase(model.dataNamespace, id)
+        return databaseHandler.erase(model.dataNamespace, model.dependsOn.dataNamespace, id)
 
     }
 

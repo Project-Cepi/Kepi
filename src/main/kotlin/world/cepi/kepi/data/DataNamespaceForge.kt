@@ -9,7 +9,7 @@ package world.cepi.kepi.data
  *
  * mob.registry is the namespace, nested in (registry of (mob)),
  */
-open class DataNamespaceForge(
+inline class DataNamespaceForge(
     /**
      * List of keys, in the example above it would be
      *
