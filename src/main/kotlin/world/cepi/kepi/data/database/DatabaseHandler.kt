@@ -1,4 +1,7 @@
-package world.cepi.kepi.data
+package world.cepi.kepi.data.database
+
+import world.cepi.kepi.data.DataNamespaceForge
+import world.cepi.kepi.data.ID
 
 /**
  * Represents a simple database handler. Can be hooked to anything -- local file storage, local dbs, online dbs, etc.

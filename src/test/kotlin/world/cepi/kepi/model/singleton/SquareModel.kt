@@ -4,9 +4,9 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import world.cepi.kepi.data.DataNamespaceForge
 import world.cepi.kepi.data.ID
-import world.cepi.kepi.data.Model
-import world.cepi.kepi.data.Model.Companion.defaultID
-import world.cepi.kepi.data.Model.Companion.jsonParser
+import world.cepi.kepi.data.model.Model
+import world.cepi.kepi.data.model.Model.Companion.defaultID
+import world.cepi.kepi.data.model.Model.Companion.jsonParser
 
 /**
  * Singleton model -- storing a `Square` would only store this one instance of the square at the same ID.

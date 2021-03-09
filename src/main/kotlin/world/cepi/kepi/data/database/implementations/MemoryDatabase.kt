@@ -1,8 +1,8 @@
-package world.cepi.kepi.data.database
+package world.cepi.kepi.data.database.implementations
 
 import world.cepi.kepi.data.DataNamespaceForge
-import world.cepi.kepi.data.DatabaseHandler
 import world.cepi.kepi.data.ID
+import world.cepi.kepi.data.database.DatabaseHandler
 import java.util.concurrent.ConcurrentHashMap
 
 /**

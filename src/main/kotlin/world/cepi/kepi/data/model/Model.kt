@@ -1,6 +1,9 @@
-package world.cepi.kepi.data
+package world.cepi.kepi.data.model
 
 import kotlinx.serialization.json.Json
+import world.cepi.kepi.data.DataNamespaceForge
+import world.cepi.kepi.data.ID
+import world.cepi.kepi.data.asNamespace
 
 /**
  * Represents a storable object, anywhere.
