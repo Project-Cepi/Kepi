@@ -19,12 +19,12 @@ object DataHandler {
 
         val data = model.asData(item)
 
-        return databaseHandler.put(model.dataNamespace, model.dependsOn.dataNamespace, id = data.first, data = data.second)
+        return databaseHandler.put(model.dataNamespace, model.dependsOn?.dataNamespace ?: Model.defaultNamespace, id = data.first, data = data.second)
     }
 
     fun <T> erase(model: Model<T>, id: ID): Boolean {
 
-        return databaseHandler.erase(model.dataNamespace, model.dependsOn.dataNamespace, id)
+        return databaseHandler.erase(model.dataNamespace, model.dependsOn?.dataNamespace ?: Model.defaultNamespace, id)
 
     }
 
