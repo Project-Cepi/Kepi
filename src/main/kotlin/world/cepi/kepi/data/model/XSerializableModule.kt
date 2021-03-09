@@ -6,7 +6,7 @@ import world.cepi.kepi.data.model.Model.Companion.defaultID
 import world.cepi.kepi.data.model.Model.Companion.jsonParser
 import kotlin.reflect.KClass
 
-interface KotlinXModule<T : @Serializable Any> : Model<T> {
+interface XSerializableModule<T : @Serializable Any> : Model<T> {
 
     fun id(item: T): ID =
         defaultID
