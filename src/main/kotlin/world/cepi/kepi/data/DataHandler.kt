@@ -17,7 +17,7 @@ object DataHandler {
      * @param model The model object to use.
      * @param data The data as JSON (string)
      */
-    fun <T> put(model: Model<T>, item: T, id: ID): Boolean {
+    fun <T> put(model: Model<T>, item: T): Boolean {
 
         val data = model.asData(item)
 

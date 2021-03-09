@@ -2,22 +2,25 @@ package world.cepi.kepi.data.model
 
 import kotlinx.serialization.*
 import world.cepi.kepi.data.ID
+import world.cepi.kepi.data.model.Model.Companion.defaultID
 import world.cepi.kepi.data.model.Model.Companion.jsonParser
 import kotlin.reflect.KClass
 
-abstract class KotlinXModule<T : @Serializable Any> : Model<T> {
+interface KotlinXModule<T : @Serializable Any> : Model<T> {
 
-    abstract fun getID(item: T): ID
-    abstract fun getClass(): KClass<T>
+    fun id(item: T): ID =
+        defaultID
+
+    val clazz: KClass<T>
 
     @InternalSerializationApi
     override fun asData(item: T): Pair<ID, String> {
-        return getID(item) to jsonParser.encodeToString(getClass().serializer(), item)
+        return id(item) to jsonParser.encodeToString(clazz.serializer(), item)
     }
 
     @InternalSerializationApi
     override fun asObject(data: String): T {
-        return jsonParser.decodeFromString(getClass().serializer(), data)
+        return jsonParser.decodeFromString(clazz.serializer(), data)
     }
 
 }
