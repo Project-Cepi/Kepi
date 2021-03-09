@@ -15,7 +15,7 @@ object DataHandler {
      * Puts data at a namespace + id
      *
      * @param model The model object to use.
-     * @param data The data as JSON (string)
+     * @param item The item to use
      */
     fun <T> put(model: Model<T>, item: T): Boolean {
 
