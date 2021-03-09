@@ -1,6 +1,6 @@
 package world.cepi.kepi.data
 
-import world.cepi.kepi.data.databases.MemoryDatabase
+import world.cepi.kepi.data.database.MemoryDatabase
 
 object DataHandler {
 

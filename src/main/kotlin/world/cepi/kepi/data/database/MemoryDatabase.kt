@@ -1,4 +1,4 @@
-package world.cepi.kepi.data.databases
+package world.cepi.kepi.data.database
 
 import world.cepi.kepi.data.DataNamespaceForge
 import world.cepi.kepi.data.DatabaseHandler
