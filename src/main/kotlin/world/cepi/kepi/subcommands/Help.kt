@@ -1,9 +1,11 @@
 package world.cepi.kepi.subcommands
 
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.chat.ChatColor.*
 import net.minestom.server.command.builder.Command
 
-class Help(vararg val messages: String, name: String = "help") : Command(name) {
+class Help(vararg val messages: Component, name: String = "help") : Command(name) {
 
     companion object {
         const val head = "╓"
@@ -17,13 +19,13 @@ class Help(vararg val messages: String, name: String = "help") : Command(name) {
 
     init {
         setDefaultExecutor { sender, _ ->
-            sender.sendMessage("$DARK_GRAY$head${arm.repeat(armLength)}")
+            sender.sendMessage(Component.text("$head${arm.repeat(armLength)}", NamedTextColor.DARK_GRAY))
 
-            messages.forEach {
-                sender.sendMessage("$DARK_GRAY$body $GRAY$it")
-            }
+            sender.sendMessage(Component.text("$body $GRAY", NamedTextColor.DARK_GRAY).also {
+                it.append(messages.reduce { acc, component -> acc.append(component) })
+            })
 
-            sender.sendMessage("$DARK_GRAY$tail${arm.repeat(armLength)}")
+            sender.sendMessage(Component.text("$tail${arm.repeat(armLength)}", NamedTextColor.DARK_GRAY))
         }
     }
 
