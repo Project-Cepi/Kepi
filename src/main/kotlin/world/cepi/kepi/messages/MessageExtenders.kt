@@ -25,7 +25,7 @@ fun CommandSender.sendFormattedMessage(component: Component, vararg params: Comp
         Component.text().content("|").color(NamedTextColor.DARK_GRAY).decoration(TextDecoration.BOLD, true).build()
             .append(Component.space())
             .append(Component.text("", NamedTextColor.GRAY))
-            .append(mutableComponent)
+            .append(mutableComponent.color(NamedTextColor.GRAY).decoration(TextDecoration.BOLD, false))
     )
 }
 
