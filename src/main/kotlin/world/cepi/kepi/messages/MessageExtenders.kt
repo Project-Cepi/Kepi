@@ -5,7 +5,11 @@ import net.kyori.adventure.text.TextReplacementConfig
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.Style
 import net.kyori.adventure.text.format.TextDecoration
+import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer
 import net.minestom.server.command.CommandSender
+import java.util.regex.Pattern
+
+private val replacementRegex = "%(\\d+)".toRegex()
 
 /**
  * Sends a formatted message to the corresponding sender.
@@ -14,18 +18,22 @@ import net.minestom.server.command.CommandSender
  * @param params The replacers, usually used to replace a placeholder in a translation message
  */
 fun CommandSender.sendFormattedMessage(component: Component, vararg params: Component = arrayOf()) {
-
-    var mutableComponent = component
-
-    params.forEachIndexed { index, item ->
-        mutableComponent = component.replaceText(TextReplacementConfig.builder().match("%${index + 1}").replacement(item).build())
-    }
-
+    
     this.sendMessage(
         Component.text().content("|").color(NamedTextColor.DARK_GRAY).decoration(TextDecoration.BOLD, true).build()
             .append(Component.space())
             .append(Component.text("", NamedTextColor.GRAY))
-            .append(mutableComponent.color(NamedTextColor.GRAY).decoration(TextDecoration.BOLD, false))
+            .append(
+                component
+                    .replaceText(
+                        TextReplacementConfig.builder()
+                            .match(replacementRegex.toPattern())
+                            .replacement { component -> Component.text(replacementRegex.find(component.content())!!.groupValues[0]) }
+                            .build()
+                    )
+                    .color(NamedTextColor.GRAY)
+                    .decoration(TextDecoration.BOLD, false)
+            )
     )
 }
 
