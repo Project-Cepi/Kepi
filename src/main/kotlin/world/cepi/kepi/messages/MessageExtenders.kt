@@ -18,7 +18,7 @@ private val replacementRegex = "%(\\d+)".toRegex()
  * @param params The replacers, usually used to replace a placeholder in a translation message
  */
 fun CommandSender.sendFormattedMessage(component: Component, vararg params: Component = arrayOf()) {
-    
+
     this.sendMessage(
         Component.text().content("|").color(NamedTextColor.DARK_GRAY).decoration(TextDecoration.BOLD, true).build()
             .append(Component.space())
