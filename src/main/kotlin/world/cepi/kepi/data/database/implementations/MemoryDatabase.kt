@@ -11,9 +11,9 @@ import java.util.concurrent.ConcurrentHashMap
 class MemoryDatabase : DatabaseHandler {
 
     /** String (namespace) that stores (namespaces) paired to string (data) */
-    val map: MutableMap<
+    val map: ConcurrentHashMap<
             DataNamespaceForge,
-            MutableMap<DataNamespaceForge, MutableMap<ID, String>>
+            ConcurrentHashMap<DataNamespaceForge, ConcurrentHashMap<ID, String>>
     > = ConcurrentHashMap()
 
     override fun put(namespace: DataNamespaceForge, childNamespace: DataNamespaceForge, id: ID, data: String): Boolean {
