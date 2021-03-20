@@ -22,10 +22,10 @@ fun CommandSender.sendFormattedMessage(component: Component, vararg params: Comp
     }
 
     this.sendMessage(
-        Component.text("|")
-            .style(Style.style(NamedTextColor.DARK_GRAY, TextDecoration.BOLD))
+        Component.text().content("|").color(NamedTextColor.DARK_GRAY).decoration(TextDecoration.BOLD, true).build()
+            .append(Component.space())
             .append(Component.text("", NamedTextColor.GRAY))
-            .append(Component.space()).append(mutableComponent)
+            .append(mutableComponent)
     )
 }
 
@@ -38,17 +38,5 @@ fun CommandSender.sendFormattedMessage(component: Component, vararg params: Comp
 fun CommandSender.sendFormattedMessage(message: String, vararg params: Component = arrayOf()) {
 
     this.sendFormattedMessage(Component.text(message), *params)
-
-}
-
-/**
- * Sends a formatted message to the corresponding sender.
- *
- * @param message The origin message, usually grabbed from the list of translations
- * @param params The replacers, usually used to replace a placeholder in a translation message
- */
-fun CommandSender.sendFormattedMessage(message: String, vararg params: String = arrayOf()) {
-
-    this.sendFormattedMessage(Component.text(message), *params.map { Component.text(it) }.toTypedArray())
 
 }
