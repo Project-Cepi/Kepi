@@ -1,6 +1,6 @@
 package world.cepi.kepi.data.database.implementations
 
-import world.cepi.kepi.data.DataNamespaceForge
+import world.cepi.kepi.data.DataNamespace
 import world.cepi.kepi.data.ID
 import world.cepi.kepi.data.database.DatabaseHandler
 import java.util.concurrent.ConcurrentHashMap
@@ -12,11 +12,11 @@ class MemoryDatabase : DatabaseHandler {
 
     /** String (namespace) that stores (namespaces) paired to string (data) */
     val map: ConcurrentHashMap<
-            DataNamespaceForge,
-            ConcurrentHashMap<DataNamespaceForge, ConcurrentHashMap<ID, String>>
+            DataNamespace,
+            ConcurrentHashMap<DataNamespace, ConcurrentHashMap<ID, String>>
     > = ConcurrentHashMap()
 
-    override fun put(namespace: DataNamespaceForge, childNamespace: DataNamespaceForge, id: ID, data: String): Boolean {
+    override fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: String): Boolean {
         if (map[namespace] == null) {
             map[namespace] = ConcurrentHashMap()
         }
@@ -30,7 +30,7 @@ class MemoryDatabase : DatabaseHandler {
         return true
     }
 
-    override fun erase(namespace: DataNamespaceForge, childNamespace: DataNamespaceForge, id: ID): Boolean {
+    override fun erase(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): Boolean {
         if (map[namespace] == null) {
             map[namespace] = ConcurrentHashMap()
         }

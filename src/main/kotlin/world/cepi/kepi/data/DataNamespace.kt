@@ -9,7 +9,7 @@ package world.cepi.kepi.data
  *
  * mob.registry is the namespace, nested in (registry of (mob)),
  */
-inline class DataNamespaceForge(
+inline class DataNamespace(
     /**
      * List of keys, in the example above it would be
      *
@@ -21,8 +21,8 @@ inline class DataNamespaceForge(
 
     constructor(vararg keys: String): this(keys.toList())
 
-    operator fun plus(key: String): DataNamespaceForge =
-        DataNamespaceForge(keys + key)
+    operator fun plus(key: String): DataNamespace =
+        DataNamespace(keys + key)
 
     override fun toString(): String {
         return keys.joinToString(".")
@@ -30,4 +30,4 @@ inline class DataNamespaceForge(
 
 }
 
-fun String.asNamespace() = DataNamespaceForge(this.split("."))
+fun String.asNamespace() = DataNamespace(this.split("."))

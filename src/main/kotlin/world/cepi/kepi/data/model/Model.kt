@@ -1,7 +1,7 @@
 package world.cepi.kepi.data.model
 
 import kotlinx.serialization.json.Json
-import world.cepi.kepi.data.DataNamespaceForge
+import world.cepi.kepi.data.DataNamespace
 import world.cepi.kepi.data.ID
 import world.cepi.kepi.data.asNamespace
 
@@ -13,7 +13,7 @@ import world.cepi.kepi.data.asNamespace
  * Namespace
  * Serializable
  *
- * The [DataNamespaceForge] represents its position in whatever data space it uses.
+ * The [DataNamespace] represents its position in whatever data space it uses.
  *
  * EX, `mob.registry.` has 2 keys
  * mob and registry,
@@ -38,7 +38,7 @@ interface Model<T> {
     /**
      * Represents where this Model is located.
      */
-    val dataNamespace: DataNamespaceForge
+    val dataNamespace: DataNamespace
 
     /**
      * Represents the model this model depends on, for optimization purposes.
