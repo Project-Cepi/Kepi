@@ -1,4 +1,4 @@
-package world.cepi.kepi.model.singleton
+package world.cepi.kepi.data.singleton
 
 import world.cepi.kepi.data.DataNamespaceForge
 import world.cepi.kepi.data.model.XSerializableModule

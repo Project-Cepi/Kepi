@@ -1,4 +1,4 @@
-package world.cepi.kepi.model.singleton
+package world.cepi.kepi.data.singleton
 
 import kotlinx.serialization.InternalSerializationApi
 import org.junit.jupiter.api.Test

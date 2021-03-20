@@ -1,4 +1,4 @@
-package world.cepi.kepi.namespace
+package world.cepi.kepi.data
 
 import org.junit.jupiter.api.Test
 import world.cepi.kepi.data.DataNamespaceForge
