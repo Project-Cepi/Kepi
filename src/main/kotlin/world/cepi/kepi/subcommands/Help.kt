@@ -20,8 +20,13 @@ class Help(vararg val messages: Component, name: String = "help") : Command(name
         setDefaultExecutor { sender, _ ->
             sender.sendMessage(Component.text("$head${arm.repeat(armLength)}", NamedTextColor.DARK_GRAY))
 
-            sender.sendMessage(Component.text("$body ", NamedTextColor.DARK_GRAY)
-                .append(messages.reduce { acc, component -> acc.append(component).color(NamedTextColor.GRAY) }))
+            messages.forEach {
+                sender.sendMessage(
+                    Component.text(body, NamedTextColor.DARK_GRAY)
+                        .append(Component.space())
+                        .append(it.color(NamedTextColor.GRAY))
+                )
+            }
 
             sender.sendMessage(Component.text("$tail${arm.repeat(armLength)}", NamedTextColor.DARK_GRAY))
         }
