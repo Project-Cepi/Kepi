@@ -59,4 +59,16 @@ class FormattedMessagesTest {
                 ), "| Letters: ABCABCABCABC")
     }
 
+    @Test
+    fun `make sure !! works correctly`() {
+        assertEquals(
+            PlainComponentSerializer
+                .plain()
+                .serialize(
+                    createFormattedMessage(
+                        Component.text("Hello %1!")
+                    )
+                ), "| Hello !!!")
+    }
+
 }
