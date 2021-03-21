@@ -41,9 +41,6 @@ dependencies {
     // Compile Minestom into project
     compileOnly("com.github.Project-Cepi:Minestom:c26756c487")
 
-    // Add OkHTTP3
-    compileOnly("com.squareup.okhttp3", "okhttp", "4.9.0")
-
     // Use kotlinx serialization
     compileOnly("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.0.1")
 
