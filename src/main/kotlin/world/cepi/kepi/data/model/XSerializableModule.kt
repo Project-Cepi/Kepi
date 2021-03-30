@@ -10,7 +10,7 @@ abstract class XSerializableModule<T: @kotlinx.serialization.Serializable Any>(
     override val isSingleton: Boolean
 ) : Model<T> {
     @InternalSerializationApi
-    override fun asData(item: T): Pair<ID, String> = Pair(Model.defaultID, Model.jsonParser.encodeToString(clazz.serializer(), item))
+    override fun asData(item: T): Pair<ID, String> = Pair(id(item), Model.jsonParser.encodeToString(clazz.serializer(), item))
 
     @InternalSerializationApi
     override fun asObject(data: String): T = Model.jsonParser.decodeFromString(clazz.serializer(), data)
