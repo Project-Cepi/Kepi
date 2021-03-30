@@ -15,6 +15,6 @@ abstract class XSerializableModule<T: @kotlinx.serialization.Serializable Any>(
     @InternalSerializationApi
     override fun asObject(data: String): T = Model.jsonParser.decodeFromString(clazz.serializer(), data)
 
-    fun id(item: T) = Model.defaultID
+    open fun id(item: T) = Model.defaultID
 
 }
