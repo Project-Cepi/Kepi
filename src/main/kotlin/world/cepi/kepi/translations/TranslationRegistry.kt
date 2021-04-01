@@ -1,8 +1,10 @@
 package world.cepi.kepi.translations
 
+import world.cepi.kepi.KepiSystemLoadStatus
 import java.io.BufferedInputStream
 import java.io.File
 import java.net.URL
+import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.zip.ZipInputStream
@@ -21,6 +23,8 @@ object TranslationRegistry {
 
     /** Cache folder for translations */
     val translationsFolder: Path = Paths.get("./translations")
+
+    var loadingStatus: KepiSystemLoadStatus = KepiSystemLoadStatus.LOADING
 
     /**
      * Initializes and unpacks the translations necessary
@@ -49,6 +53,8 @@ object TranslationRegistry {
                     }
                 }.toList()
         }
+
+        loadingStatus = KepiSystemLoadStatus.ENABLED
 
     }
 
