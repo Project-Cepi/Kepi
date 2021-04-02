@@ -1,13 +1,10 @@
 package world.cepi.kepi.translations
 
 import net.minestom.server.MinecraftServer
-import world.cepi.kepi.Kepi
-import world.cepi.kepi.KepiSystemLoadStatus
+import world.cepi.kepi.SystemLoadStatus
 import world.cepi.kstom.Manager
 import java.io.BufferedInputStream
-import java.io.File
 import java.net.URL
-import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.zip.ZipInputStream
@@ -27,43 +24,43 @@ object TranslationRegistry {
     /** Cache folder for translations */
     val translationsFolder: Path = Paths.get("./translations")
 
-    var loadingStatus: KepiSystemLoadStatus = KepiSystemLoadStatus.LOADING
+    var loadingStatus: SystemLoadStatus = SystemLoadStatus.LOADING
 
     /**
      * Initializes and unpacks the translations necessary
      */
     @ExperimentalPathApi
     internal fun grab() {
-    try {
-        if (!translationsFolder.exists()) translationsFolder.createDirectories()
+        try {
+            if (!translationsFolder.exists()) translationsFolder.createDirectories()
 
-        ZipInputStream(BufferedInputStream(URL(url).openStream(), bufferSize)).use { zipInputStream ->
-            generateSequence { zipInputStream.nextEntry }
-                .map { entry ->
+            ZipInputStream(BufferedInputStream(URL(url).openStream(), bufferSize)).use { zipInputStream ->
+                generateSequence { zipInputStream.nextEntry }
+                    .map { entry ->
 
-                    val file = translationsFolder.resolve(entry.name)
+                        val file = translationsFolder.resolve(entry.name)
 
-                    if (entry.isDirectory) {
-                        file.createDirectories()
-                        return@map
-                    }
+                        if (entry.isDirectory) {
+                            file.createDirectories()
+                            return@map
+                        }
 
-                    if (!file.exists()) file.createFile() // create file
+                        if (!file.exists()) file.createFile() // create file
 
-                    // write to file
-                    file.outputStream().use { fileOutputStream ->
-                        zipInputStream.copyTo(fileOutputStream, bufferSize)
-                    }
-                }.toList()
+                        // write to file
+                        file.outputStream().use { fileOutputStream ->
+                            zipInputStream.copyTo(fileOutputStream, bufferSize)
+                        }
+                    }.toList()
+            }
+
+            loadingStatus = SystemLoadStatus.ENABLED
+
+        } catch (exception: Exception) {
+            Manager.extension.getExtension("Kepi")?.logger?.error("An unexpected error occured loading translations.")
+            MinecraftServer.getExceptionManager().handleException(exception)
+            loadingStatus = SystemLoadStatus.ERROR
         }
-
-        loadingStatus = KepiSystemLoadStatus.ENABLED
-
-    } catch (exception: Exception) {
-        Manager.extension.getExtension("Kepi")?.logger?.error("An unexpected error occured loading translations.")
-        MinecraftServer.getExceptionManager().handleException(exception)
-    }
-
     }
 
     // TODO
