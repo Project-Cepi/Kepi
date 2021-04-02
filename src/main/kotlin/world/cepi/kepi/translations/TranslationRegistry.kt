@@ -1,6 +1,9 @@
 package world.cepi.kepi.translations
 
+import net.minestom.server.MinecraftServer
+import world.cepi.kepi.Kepi
 import world.cepi.kepi.KepiSystemLoadStatus
+import world.cepi.kstom.Manager
 import java.io.BufferedInputStream
 import java.io.File
 import java.net.URL
@@ -31,7 +34,7 @@ object TranslationRegistry {
      */
     @ExperimentalPathApi
     internal fun grab() {
-
+    try {
         if (!translationsFolder.exists()) translationsFolder.createDirectories()
 
         ZipInputStream(BufferedInputStream(URL(url).openStream(), bufferSize)).use { zipInputStream ->
@@ -55,6 +58,11 @@ object TranslationRegistry {
         }
 
         loadingStatus = KepiSystemLoadStatus.ENABLED
+
+    } catch (exception: Exception) {
+        Manager.extension.getExtension("Kepi")?.logger?.error("An unexpected error occured loading translations.")
+        MinecraftServer.getExceptionManager().handleException(exception)
+    }
 
     }
 
