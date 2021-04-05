@@ -5,7 +5,14 @@ import kotlinx.serialization.serializer
 import world.cepi.kepi.data.ID
 import kotlin.reflect.KClass
 
-abstract class XSerializableModule<T: @kotlinx.serialization.Serializable Any>(
+/**
+ * Represents a [Model] that is backed by a Serializable object.
+ *
+ * @param clazz The clazz that the serializable object is in.
+ *
+ * @param isSingleton Whether this object is a singleton or not.
+ */
+abstract class XSerializableModel<T: @kotlinx.serialization.Serializable Any>(
     val clazz: KClass<T>,
     override val isSingleton: Boolean
 ) : Model<T> {

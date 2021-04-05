@@ -16,7 +16,7 @@ interface DataHandler {
     var databaseHandler: DatabaseHandler
 
     /**
-     * Puts data at a namespace + id
+     * Puts an [item] in this [DataHandler]
      *
      * @param model The model object to use.
      * @param item The item to use
@@ -28,6 +28,12 @@ interface DataHandler {
         return databaseHandler.put(model.dataNamespace, model.dependsOn?.dataNamespace ?: Model.defaultNamespace, id = data.first, data = data.second)
     }
 
+    /**
+     * Removes an item from a specific [id]
+     *
+     * @param model The model object to base the ID off of
+     * @param id The ID where the object for removal is located at.
+     */
     fun <T> erase(model: Model<T>, id: ID): Boolean {
 
         return databaseHandler.erase(model.dataNamespace, model.dependsOn?.dataNamespace ?: Model.defaultNamespace, id)
