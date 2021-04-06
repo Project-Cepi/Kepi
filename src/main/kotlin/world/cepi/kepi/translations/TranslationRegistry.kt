@@ -17,10 +17,9 @@ import java.io.FileInputStream
 
 import java.io.InputStream
 
-
-
-
 object TranslationRegistry {
+
+    private val cache: MutableMap<String, MutableMap<Locale, Properties>> = mutableMapOf()
 
     /** URL to grab the zip from */
     const val url = "https://github.com/Project-Cepi/Translations/releases/download/latest/pack.zip"
@@ -84,20 +83,33 @@ object TranslationRegistry {
         }
     }
 
-    // TODO cache
     /**
-     * Grabs a translation from the specified [namespace] at a [key] with a locale.
+     * Grabs a translation from the specified [namespace] at a [key] with a [locale].
      */
-    @ExperimentalPathApi
     operator fun get(namespace: String, key: String, locale: Locale): String? {
+
+        run {
+            // Check if the cache contains this namespace & locale.
+            if (cache.contains(namespace) && cache[namespace]!!.containsKey(locale)) {
+                // Return the value if so (if it isnt a string return null)
+                return cache[namespace]!![locale]!![key] as? String
+            }
+        }
+
         val path = translationsFolder.resolve(namespace).resolve("bundle_${locale.toLanguageTag().replace('-', '_')}.properties")
 
         try {
-            path.inputStream().use { input ->
+            Files.newInputStream(path).use { input ->
                 val prop = Properties()
 
                 // load a properties file
                 prop.load(input)
+
+                // Set the namespace map if it isnt there
+                if (cache[namespace] == null) cache[namespace] = mutableMapOf()
+
+                // cache the proeprties
+                cache[namespace]!![locale] = prop
 
                 // get the property value and return it
                 return prop.getProperty(key)
