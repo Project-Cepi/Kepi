@@ -11,6 +11,14 @@ import java.nio.file.attribute.BasicFileAttributes
 import java.util.*
 import java.util.zip.ZipInputStream
 import kotlin.io.path.*
+import java.util.Properties
+
+import java.io.FileInputStream
+
+import java.io.InputStream
+
+
+
 
 object TranslationRegistry {
 
@@ -80,8 +88,23 @@ object TranslationRegistry {
     /**
      * Grabs a translation from the specified [namespace] at a [key] with a locale.
      */
+    @ExperimentalPathApi
     operator fun get(namespace: String, key: String, locale: Locale): String? {
         val path = translationsFolder.resolve(namespace).resolve("bundle_${locale.toLanguageTag().replace('-', '_')}.properties")
+
+        try {
+            path.inputStream().use { input ->
+                val prop = Properties()
+
+                // load a properties file
+                prop.load(input)
+
+                // get the property value and return it
+                return prop.getProperty(key)
+            }
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        }
 
         return null
     }
