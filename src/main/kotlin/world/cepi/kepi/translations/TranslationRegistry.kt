@@ -4,16 +4,15 @@ import net.minestom.server.MinecraftServer
 import world.cepi.kepi.SystemLoadStatus
 import world.cepi.kstom.Manager
 import java.io.BufferedInputStream
+import java.io.IOException
 import java.net.URL
-import java.nio.file.Path
-import java.nio.file.Paths
+import java.nio.file.*
+import java.nio.file.attribute.BasicFileAttributes
+import java.util.*
 import java.util.zip.ZipInputStream
 import kotlin.io.path.*
 
 object TranslationRegistry {
-
-    /** Non-magic string for bundle. */
-    const val bundle = "bundle"
 
     /** URL to grab the zip from */
     const val url = "https://github.com/Project-Cepi/Translations/releases/download/latest/pack.zip"
@@ -33,6 +32,20 @@ object TranslationRegistry {
     internal fun grab() {
         try {
             if (!translationsFolder.exists()) translationsFolder.createDirectories()
+            else {
+                Files.walkFileTree(translationsFolder, object : SimpleFileVisitor<Path>() {
+                    override fun visitFile(file: Path?, attrs: BasicFileAttributes?): FileVisitResult {
+                        file?.deleteIfExists()
+                        return FileVisitResult.CONTINUE;
+                    }
+
+                    override fun postVisitDirectory(dir: Path?, exc: IOException?): FileVisitResult {
+                        if (dir != translationsFolder)
+                            dir?.deleteIfExists()
+                        return FileVisitResult.CONTINUE;
+                    }
+                })
+            }
 
             ZipInputStream(BufferedInputStream(URL(url).openStream(), bufferSize)).use { zipInputStream ->
                 generateSequence { zipInputStream.nextEntry }
@@ -63,9 +76,12 @@ object TranslationRegistry {
         }
     }
 
-    // TODO
-    operator fun get(namespace: String, locale: Locale): String? {
-        val path = translationsFolder.resolve(namespace).resolve("${bundle}_${locale.name}.properties")
+    // TODO cache
+    /**
+     * Grabs a translation from the specified [namespace] at a [key] with a locale.
+     */
+    operator fun get(namespace: String, key: String, locale: Locale): String? {
+        val path = translationsFolder.resolve(namespace).resolve("bundle_${locale.toLanguageTag().replace('-', '_')}.properties")
 
         return null
     }
