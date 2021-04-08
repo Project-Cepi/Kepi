@@ -15,7 +15,8 @@ import java.util.Properties
 
 object TranslationRegistry {
 
-    private val cache: MutableMap<String, MutableMap<Locale, Properties>> = mutableMapOf()
+    /** Namespace, (Locale as Code -- Properties)*/
+    private val cache: MutableMap<String, MutableMap<String, Properties>> = mutableMapOf()
 
     /** URL to grab the zip from */
     const val url = "https://github.com/Project-Cepi/Translations/releases/download/latest/pack.zip"
@@ -82,7 +83,7 @@ object TranslationRegistry {
     /**
      * Grabs a translation from the specified [namespace] at a [key] with a [locale].
      */
-    operator fun get(namespace: String, key: String, locale: Locale): String? {
+    operator fun get(namespace: String, key: String, locale: String): String? {
 
         run {
             // Check if the cache contains this namespace & locale.
@@ -92,7 +93,9 @@ object TranslationRegistry {
             }
         }
 
-        val path = translationsFolder.resolve(namespace).resolve("bundle_${locale.toLanguageTag().replace('-', '_')}.properties")
+        val path = translationsFolder
+            .resolve(namespace)
+            .resolve("bundle_${locale.replace('-', '_')}.properties")
 
         try {
             Files.newInputStream(path).use { input ->

@@ -9,5 +9,5 @@ import java.lang.Exception
 import java.util.*
 
 fun CommandSender.formatTranslableMessage(namespace: String = "common", key: String): Component {
-    return Component.text(TranslationRegistry.get(namespace, key, (this as? Player)?.locale ?: Locale.ENGLISH) ?: "$namespace.$key")
+    return Component.text(TranslationRegistry[namespace, key, (this as? Player)?.settings?.locale ?: "en_US"] ?: "$namespace.$key")
 }

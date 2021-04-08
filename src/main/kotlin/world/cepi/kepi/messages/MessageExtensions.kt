@@ -45,7 +45,15 @@ fun Component.formatPercent(vararg params: Component = arrayOf()): Component =
  * @param component The origin component, this just appends the prefix.
  */
 fun CommandSender.sendFormattedMessage(component: Component, vararg params: Component = arrayOf()) =
-    this.sendMessage(formattedPrefix.append(component).formatPercent(*params))
+    this.sendMessage(
+        formattedPrefix
+            .append(
+                Component.text()
+                    .color(NamedTextColor.GRAY)
+                    .decoration(TextDecoration.BOLD, false)
+                    .append(component.formatPercent(*params))
+            )
+    )
 
 /**
  * Sends a formatted & translated message to the corresponding sender.
