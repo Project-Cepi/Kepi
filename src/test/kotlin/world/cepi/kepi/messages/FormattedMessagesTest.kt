@@ -13,11 +13,10 @@ class FormattedMessagesTest {
             PlainComponentSerializer
                 .plain()
                 .serialize(
-                    createFormattedMessage(
-                        Component.text("Hello %1!"),
+                    Component.text("Hello %1!").formatPercent(
                         Component.text("World")
                     )
-                ), "| Hello World!")
+                ), "Hello World!")
     }
 
     @Test
@@ -26,13 +25,12 @@ class FormattedMessagesTest {
             PlainComponentSerializer
                 .plain()
                 .serialize(
-                    createFormattedMessage(
-                        Component.text("Hey %1, %2, and %3!"),
+                    Component.text("Hey %1, %2, and %3!").formatPercent(
                         Component.text("A"),
                         Component.text("B"),
                         Component.text("C")
                     )
-                ), "| Hey A, B, and C!")
+                ), "Hey A, B, and C!")
     }
 
     @Test
@@ -41,8 +39,7 @@ class FormattedMessagesTest {
             PlainComponentSerializer
                 .plain()
                 .serialize(
-                    createFormattedMessage(
-                        Component.text("Letters: %1%2%3%4%5%6%7%8%9%10%11%12"),
+                    Component.text("Letters: %1%2%3%4%5%6%7%8%9%10%11%12").formatPercent(
                         Component.text("A"), // 1
                         Component.text("B"), // 2
                         Component.text("C"), // 3
@@ -56,7 +53,7 @@ class FormattedMessagesTest {
                         Component.text("B"), // 11
                         Component.text("C")  // 12
                     )
-                ), "| Letters: ABCABCABCABC")
+                ), "Letters: ABCABCABCABC")
     }
 
     @Test
@@ -65,10 +62,8 @@ class FormattedMessagesTest {
             PlainComponentSerializer
                 .plain()
                 .serialize(
-                    createFormattedMessage(
-                        Component.text("Hello %1!")
-                    )
-                ), "| Hello !!!")
+                    Component.text("Hello %1!").formatPercent()
+                ), "Hello !!!")
     }
 
 }

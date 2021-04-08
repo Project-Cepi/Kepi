@@ -1,4 +1,4 @@
-package world.cepi.kepi.translations
+package world.cepi.kepi.messages.translations
 
 import net.minestom.server.MinecraftServer
 import world.cepi.kepi.SystemLoadStatus
@@ -12,10 +12,6 @@ import java.util.*
 import java.util.zip.ZipInputStream
 import kotlin.io.path.*
 import java.util.Properties
-
-import java.io.FileInputStream
-
-import java.io.InputStream
 
 object TranslationRegistry {
 

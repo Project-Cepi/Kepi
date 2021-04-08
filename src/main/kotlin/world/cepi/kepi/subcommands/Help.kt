@@ -16,7 +16,7 @@ class Help(vararg val messages: Component, name: String = "help") : Command(name
             sender.sendMessage(Component.text(arm.repeat(armLength), NamedTextColor.DARK_GRAY))
 
             messages.forEach {
-                sender.sendMessage(it.color(NamedTextColor.GRAY))
+                sender.sendMessage(Component.text().color(NamedTextColor.GRAY).append(it))
             }
 
             sender.sendMessage(Component.text(arm.repeat(armLength), NamedTextColor.DARK_GRAY))

@@ -3,7 +3,7 @@ package world.cepi.kepi.command
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.Command
-import world.cepi.kepi.translations.TranslationRegistry
+import world.cepi.kepi.messages.translations.TranslationRegistry
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.asSubcommand
 
