@@ -6,7 +6,6 @@ plugins {
     kotlin("plugin.serialization") version "1.4.20"
     id("com.github.johnrengelman.shadow") version "6.1.0"
     `maven-publish`
-    maven
 
     // Apply the application plugin to add support for building a jar
     java
