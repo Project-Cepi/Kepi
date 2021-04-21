@@ -13,7 +13,7 @@ class MemoryDatabase : DatabaseHandler {
     /** String (namespace) that stores (namespaces) paired to string (data) */
     val map: ConcurrentHashMap<
             DataNamespace,
-            ConcurrentHashMap<DataNamespace, ConcurrentHashMap<ID, String>>
+            ConcurrentHashMap<DataNamespace, ConcurrentHashMap<ID, String?>>
     > = ConcurrentHashMap()
 
     override fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: String): Boolean {
@@ -28,6 +28,18 @@ class MemoryDatabase : DatabaseHandler {
         map[namespace]!![childNamespace]!![id] = data
 
         return true
+    }
+
+    override fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): String? {
+        if (map[namespace] == null) {
+            map[namespace] = ConcurrentHashMap()
+        }
+
+        if (map[namespace]!![childNamespace] == null) {
+            map[namespace]!![childNamespace] = ConcurrentHashMap()
+        }
+
+        return map[namespace]!![childNamespace]!![id]
     }
 
     override fun erase(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): Boolean {

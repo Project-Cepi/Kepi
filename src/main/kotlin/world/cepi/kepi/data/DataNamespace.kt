@@ -1,5 +1,7 @@
 package world.cepi.kepi.data
 
+import javax.xml.crypto.Data
+
 /**
  * Represents a data namespace, its "string" format is in the format of a Skript variable.
  *
@@ -23,6 +25,9 @@ inline class DataNamespace(
 
     operator fun plus(key: String): DataNamespace =
         DataNamespace(keys + key)
+
+    operator fun plus(namespace: DataNamespace): DataNamespace =
+        DataNamespace(keys + namespace.keys)
 
     override fun toString(): String {
         return keys.joinToString(".")
