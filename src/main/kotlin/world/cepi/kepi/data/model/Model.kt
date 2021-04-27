@@ -1,6 +1,8 @@
 package world.cepi.kepi.data.model
 
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 import world.cepi.kepi.data.DataNamespace
 import world.cepi.kepi.data.ID
 import world.cepi.kepi.data.asNamespace
@@ -56,7 +58,7 @@ interface Model<T> {
      * @return A pair of ID to valid JSON data (json will be parsed to whatever)
      * Reccomended to use kotlinx.serialization.
      */
-    fun asData(item: T): Pair<ID, String>
+    fun asData(item: T): JsonElement
 
     /**
      * Data into object T
@@ -66,7 +68,7 @@ interface Model<T> {
      * @return The [T] object.
      * Reccomended to use kotlinx.serialization.
      */
-    fun asObject(data: String): T
+    fun asObject(data: JsonElement): T
 
     /**
      * Represents if all data returned from [asData] will have the same ID.
