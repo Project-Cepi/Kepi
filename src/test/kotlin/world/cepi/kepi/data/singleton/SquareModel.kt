@@ -1,12 +1,11 @@
 package world.cepi.kepi.data.singleton
 
+import kotlinx.serialization.Serializable
 import world.cepi.kepi.data.DataNamespace
-import world.cepi.kepi.data.model.XSerializableModel
+import world.cepi.kepi.data.model.JsonModel
 
 /**
  * Singleton model -- storing a `Square` would only store this one instance of the square at the same ID.
  */
-object SquareModel : XSerializableModel<Square>(Square::class, true) {
-    override val dataNamespace: DataNamespace = DataNamespace("shape", "sqare")
 
-}
+object SquareModel : JsonModel<Square>(Square.serializer(), true, DataNamespace("shape", "square"))
