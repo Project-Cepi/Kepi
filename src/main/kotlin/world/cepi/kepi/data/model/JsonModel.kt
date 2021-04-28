@@ -18,10 +18,11 @@ import kotlin.reflect.KClass
  */
 open class JsonModel<T: @kotlinx.serialization.Serializable Any>(
     private val serializer: KSerializer<T>,
+    override val dataNamespace: DataNamespace,
     override val isSingleton: Boolean = false,
-    override val dataNamespace: DataNamespace
+    val id: ID = Model.defaultID
 ) : Model<T> {
 
-    override fun asData(item: T): JsonElement = Model.jsonParser.encodeToJsonElement(serializer, item)
+    override fun asData(item: T): Pair<ID, JsonElement> = id to Model.jsonParser.encodeToJsonElement(serializer, item)
     override fun asObject(data: JsonElement): T = Model.jsonParser.decodeFromJsonElement(serializer, data)
 }

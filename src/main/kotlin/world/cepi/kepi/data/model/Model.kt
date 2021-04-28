@@ -58,7 +58,7 @@ interface Model<T> {
      * @return A pair of ID to valid JSON data (json will be parsed to whatever)
      * Reccomended to use kotlinx.serialization.
      */
-    fun asData(item: T): JsonElement
+    fun asData(item: T): Pair<ID, JsonElement>
 
     /**
      * Data into object T
