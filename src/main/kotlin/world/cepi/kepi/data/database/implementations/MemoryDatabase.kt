@@ -1,5 +1,6 @@
 package world.cepi.kepi.data.database.implementations
 
+import kotlinx.serialization.json.JsonElement
 import world.cepi.kepi.data.DataNamespace
 import world.cepi.kepi.data.ID
 import world.cepi.kepi.data.database.DatabaseHandler
@@ -13,10 +14,10 @@ class MemoryDatabase : DatabaseHandler {
     /** String (namespace) that stores (namespaces) paired to string (data) */
     val map: ConcurrentHashMap<
             DataNamespace,
-            ConcurrentHashMap<DataNamespace, ConcurrentHashMap<ID, String?>>
+            ConcurrentHashMap<DataNamespace, ConcurrentHashMap<ID, JsonElement?>>
     > = ConcurrentHashMap()
 
-    override fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: String): Boolean {
+    override fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: JsonElement): Boolean {
         if (map[namespace] == null) {
             map[namespace] = ConcurrentHashMap()
         }
@@ -30,7 +31,7 @@ class MemoryDatabase : DatabaseHandler {
         return true
     }
 
-    override fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): String? {
+    override fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): JsonElement? {
         if (map[namespace] == null) {
             map[namespace] = ConcurrentHashMap()
         }

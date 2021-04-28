@@ -1,5 +1,7 @@
 package world.cepi.kepi.data.database.implementations
 
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 import net.minestom.server.MinecraftServer
 import net.minestom.server.storage.systems.FileStorageSystem
 import world.cepi.kepi.data.DataNamespace
@@ -14,8 +16,8 @@ class MinestomDatabase(uniqueID: ID) : DatabaseHandler {
 
     val storage = MinecraftServer.getStorageManager().getLocation(uniqueID.id)!!
 
-    override fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: String): Boolean {
-        storage.set((namespace + childNamespace + id.id).toString(), data.encodeToByteArray())
+    override fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: JsonElement): Boolean {
+        storage.set((namespace + childNamespace + id.id).toString(), data.toString().encodeToByteArray())
         return true
     }
 
@@ -24,7 +26,7 @@ class MinestomDatabase(uniqueID: ID) : DatabaseHandler {
         return true
     }
 
-    override fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): String? {
-        return storage.get((namespace + childNamespace + id.id).toString())?.let { String(it) }
+    override fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): JsonElement? {
+        return storage.get((namespace + childNamespace + id.id).toString())?.let { Json.parseToJsonElement(String(it)) }
     }
 }

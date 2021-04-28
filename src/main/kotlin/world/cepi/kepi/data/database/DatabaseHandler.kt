@@ -1,5 +1,6 @@
 package world.cepi.kepi.data.database
 
+import kotlinx.serialization.json.JsonElement
 import world.cepi.kepi.data.DataNamespace
 import world.cepi.kepi.data.ID
 
@@ -15,7 +16,7 @@ interface DatabaseHandler {
      * @param id The ID of the object.
      * @param data The data as JSON (string)
      */
-    fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: String): Boolean
+    fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: JsonElement): Boolean
 
     /**
      * Erase data from a namespace + id
@@ -35,6 +36,6 @@ interface DatabaseHandler {
      *
      * @return The data at that space, null if not exists
      */
-    fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): String?
+    fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): JsonElement?
 
 }
