@@ -8,4 +8,4 @@ import world.cepi.kepi.data.model.JsonModel
  * Singleton model -- storing a `Square` would only store this one instance of the square at the same ID.
  */
 
-object SquareModel : JsonModel<Square>(Square.serializer(), true, DataNamespace("shape", "square"))
+object SquareModel : JsonModel<Square>(Square.serializer(), DataNamespace("shape", "square"), isSingleton = true)
