@@ -5,12 +5,12 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.Command
 import world.cepi.kepi.messages.translations.TranslationRegistry
 import world.cepi.kstom.command.addSyntax
-import world.cepi.kstom.command.arguments.asSubcommand
+import world.cepi.kstom.command.arguments.literal
 
 object KepiCommand : Command("kepi") {
 
     init {
-        val status = "status".asSubcommand()
+        val status = "status".literal()
 
         addSyntax(status) { sender ->
 
