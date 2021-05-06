@@ -13,46 +13,27 @@ class MemoryDatabase : DatabaseHandler<JsonElement> {
 
     /** String (namespace) that stores (namespaces) paired to string (data) */
     val map: ConcurrentHashMap<
-            DataNamespace,
-            ConcurrentHashMap<DataNamespace, ConcurrentHashMap<ID, JsonElement?>>
-    > = ConcurrentHashMap()
+            DataNamespace, ConcurrentHashMap<ID, JsonElement?>
+            > = ConcurrentHashMap()
 
-    override fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: JsonElement): Boolean {
-        if (map[namespace] == null) {
-            map[namespace] = ConcurrentHashMap()
-        }
 
-        if (map[namespace]!![childNamespace] == null) {
-            map[namespace]!![childNamespace] = ConcurrentHashMap()
-        }
-
-        map[namespace]!![childNamespace]!![id] = data
+    override fun put(namespace: DataNamespace, id: ID, data: JsonElement): Boolean {
+        if (map[namespace] == null) map[namespace] = ConcurrentHashMap()
+        map[namespace]!![id] = data
 
         return true
     }
 
-    override fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): JsonElement? {
-        if (map[namespace] == null) {
-            map[namespace] = ConcurrentHashMap()
-        }
-
-        if (map[namespace]!![childNamespace] == null) {
-            map[namespace]!![childNamespace] = ConcurrentHashMap()
-        }
-
-        return map[namespace]!![childNamespace]!![id]
+    override fun get(namespace: DataNamespace, id: ID): JsonElement? {
+        return map[namespace]?.get(id)
     }
 
-    override fun erase(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): Boolean {
+    override fun erase(namespace: DataNamespace, id: ID): Boolean {
         if (map[namespace] == null) {
-            map[namespace] = ConcurrentHashMap()
+            return false
         }
 
-        if (map[namespace]!![childNamespace] == null) {
-            map[namespace]!![childNamespace] = ConcurrentHashMap()
-        }
-
-        map[namespace]!![childNamespace]!!.remove(id)
+        map[namespace]!!.remove(id)
 
         return true
     }

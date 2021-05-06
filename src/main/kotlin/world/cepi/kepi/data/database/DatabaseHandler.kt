@@ -16,7 +16,7 @@ interface DatabaseHandler<D> {
      * @param id The ID of the object.
      * @param data The data as JSON (string)
      */
-    fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: D): Boolean
+    fun put(namespace: DataNamespace, id: ID, data: D): Boolean
 
     /**
      * Erase data from a namespace + id
@@ -25,7 +25,7 @@ interface DatabaseHandler<D> {
      * @param id The ID of the object.
      * @param childSpace The namespace in the [id]. Meant to stop namespace cloning.
      */
-    fun erase(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): Boolean
+    fun erase(namespace: DataNamespace, id: ID): Boolean
 
     /**
      * Grabs data from a namespace + id
@@ -36,6 +36,6 @@ interface DatabaseHandler<D> {
      *
      * @return The data at that space, null if not exists
      */
-    fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): D?
+    fun get(namespace: DataNamespace, id: ID): D?
 
 }

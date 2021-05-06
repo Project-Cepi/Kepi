@@ -16,17 +16,17 @@ class MinestomDatabase(uniqueID: ID) : DatabaseHandler<JsonElement> {
 
     val storage = MinecraftServer.getStorageManager().getLocation(uniqueID.id)!!
 
-    override fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: JsonElement): Boolean {
-        storage.set((namespace + childNamespace + id.id).toString(), data.toString().encodeToByteArray())
+    override fun put(namespace: DataNamespace, id: ID, data: JsonElement): Boolean {
+        storage.set((namespace + id.id).toString(), data.toString().encodeToByteArray())
         return true
     }
 
-    override fun erase(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): Boolean {
-        storage.delete((namespace + childNamespace + id.id).toString())
+    override fun erase(namespace: DataNamespace, id: ID): Boolean {
+        storage.delete((namespace + id.id).toString())
         return true
     }
 
-    override fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): JsonElement? {
-        return storage.get((namespace + childNamespace + id.id).toString())?.let { Json.parseToJsonElement(String(it)) }
+    override fun get(namespace: DataNamespace, id: ID): JsonElement? {
+        return storage.get((namespace + id.id).toString())?.let { Json.parseToJsonElement(String(it)) }
     }
 }
