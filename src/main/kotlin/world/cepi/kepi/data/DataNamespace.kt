@@ -11,7 +11,8 @@ import javax.xml.crypto.Data
  *
  * mob.registry is the namespace, nested in (registry of (mob)),
  */
-inline class DataNamespace(
+@JvmInline
+value class DataNamespace(
     /**
      * List of keys, in the example above it would be
      *
