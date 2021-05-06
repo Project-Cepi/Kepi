@@ -18,6 +18,8 @@ interface DatabaseHandler<D> {
      */
     fun put(namespace: DataNamespace, id: ID, data: D): Boolean
 
+    fun putList(namespace: DataNamespace, id: ID, data: Collection<D>): Boolean
+
     /**
      * Erase data from a namespace + id
      *

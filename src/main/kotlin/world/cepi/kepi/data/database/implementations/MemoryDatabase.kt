@@ -1,5 +1,6 @@
 package world.cepi.kepi.data.database.implementations
 
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import world.cepi.kepi.data.DataNamespace
 import world.cepi.kepi.data.ID
@@ -36,5 +37,9 @@ class MemoryDatabase : DatabaseHandler<JsonElement> {
         map[namespace]!!.remove(id)
 
         return true
+    }
+
+    override fun putList(namespace: DataNamespace, id: ID, data: Collection<JsonElement>): Boolean {
+        return put(namespace, id, JsonArray(data.toList()))
     }
 }

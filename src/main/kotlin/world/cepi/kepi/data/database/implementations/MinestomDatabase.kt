@@ -1,6 +1,7 @@
 package world.cepi.kepi.data.database.implementations
 
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import net.minestom.server.MinecraftServer
 import net.minestom.server.storage.systems.FileStorageSystem
@@ -28,5 +29,9 @@ class MinestomDatabase(uniqueID: ID) : DatabaseHandler<JsonElement> {
 
     override fun get(namespace: DataNamespace, id: ID): JsonElement? {
         return storage.get((namespace + id.id).toString())?.let { Json.parseToJsonElement(String(it)) }
+    }
+
+    override fun putList(namespace: DataNamespace, id: ID, data: Collection<JsonElement>): Boolean {
+        return put(namespace, id, JsonArray(data.toList()))
     }
 }
