@@ -25,7 +25,7 @@ interface DataHandler<D> {
 
         val data = model.asData(item)
 
-        return databaseHandler.put(model.dataNamespace, model.dependsOn?.dataNamespace ?: Model.defaultNamespace, id = data.first, data = data.second)
+        return databaseHandler.put(model.dataNamespace, id = data.first, data = data.second)
     }
 
     /**
@@ -36,7 +36,7 @@ interface DataHandler<D> {
      */
     fun <T> erase(model: Model<T, D>, id: ID): Boolean {
 
-        return databaseHandler.erase(model.dataNamespace, model.dependsOn?.dataNamespace ?: Model.defaultNamespace, id)
+        return databaseHandler.erase(model.dataNamespace, id)
 
     }
 
