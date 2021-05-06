@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap
 /**
  * Database located purely in memory. Should be used for testing only.
  */
-class MemoryDatabase : DatabaseHandler {
+class MemoryDatabase : DatabaseHandler<JsonElement> {
 
     /** String (namespace) that stores (namespaces) paired to string (data) */
     val map: ConcurrentHashMap<

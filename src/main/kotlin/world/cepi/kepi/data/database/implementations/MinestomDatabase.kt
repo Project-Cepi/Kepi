@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap
 /**
  * Database located purely in memory. Should be used for testing only.
  */
-class MinestomDatabase(uniqueID: ID) : DatabaseHandler {
+class MinestomDatabase(uniqueID: ID) : DatabaseHandler<JsonElement> {
 
     val storage = MinecraftServer.getStorageManager().getLocation(uniqueID.id)!!
 
