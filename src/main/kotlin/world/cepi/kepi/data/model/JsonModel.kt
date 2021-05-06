@@ -21,7 +21,7 @@ open class JsonModel<T: @kotlinx.serialization.Serializable Any>(
     override val dataNamespace: DataNamespace,
     override val isSingleton: Boolean = false,
     val id: ID = Model.defaultID
-) : Model<T> {
+) : Model<T, JsonElement> {
 
     override fun asData(item: T): Pair<ID, JsonElement> = id to Model.jsonParser.encodeToJsonElement(serializer, item)
     override fun asObject(data: JsonElement): T = Model.jsonParser.decodeFromJsonElement(serializer, data)
