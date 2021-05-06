@@ -7,7 +7,7 @@ import world.cepi.kepi.data.ID
 /**
  * Represents a simple database handler. Can be hooked to anything -- local file storage, local dbs, online dbs, etc.
  */
-interface DatabaseHandler {
+interface DatabaseHandler<D> {
 
     /**
      * Puts data at a namespace + id
@@ -16,7 +16,7 @@ interface DatabaseHandler {
      * @param id The ID of the object.
      * @param data The data as JSON (string)
      */
-    fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: JsonElement): Boolean
+    fun put(namespace: DataNamespace, childNamespace: DataNamespace, id: ID, data: D): Boolean
 
     /**
      * Erase data from a namespace + id
@@ -36,6 +36,6 @@ interface DatabaseHandler {
      *
      * @return The data at that space, null if not exists
      */
-    fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): JsonElement?
+    fun get(namespace: DataNamespace, childNamespace: DataNamespace, id: ID): D?
 
 }
