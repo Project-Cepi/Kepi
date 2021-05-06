@@ -1,5 +1,6 @@
 package world.cepi.kepi.data
 
+import kotlinx.serialization.json.JsonElement
 import world.cepi.kepi.data.database.implementations.MemoryDatabase
 
 /**
@@ -7,4 +8,4 @@ import world.cepi.kepi.data.database.implementations.MemoryDatabase
  *
  * This represents game objects in the game made by Game Designers.
  */
-object ContentDataHandler: DataHandlerFactory({ MemoryDatabase() })
+object ContentDataHandler: DataHandlerFactory<JsonElement>({ MemoryDatabase() })
