@@ -1,6 +1,5 @@
 package world.cepi.kepi.data.singleton
 
-import kotlinx.serialization.Serializable
 import world.cepi.kepi.data.DataNamespace
 import world.cepi.kepi.data.model.JsonModel
 
