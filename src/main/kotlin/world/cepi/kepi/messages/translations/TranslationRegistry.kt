@@ -93,9 +93,17 @@ object TranslationRegistry {
             }
         }
 
-        val path = translationsFolder
+        val pathNamespace = translationsFolder
             .resolve(namespace)
-            .resolve("bundle_${locale.replace('-', '_')}.properties")
+
+        val path = pathNamespace.resolve("bundle_${locale.replace('-', '_')}.properties")
+            .let {
+                // If the path is not found attempt to use en_US instead
+                if (!it.exists())
+                    return@let pathNamespace.resolve("bundle_en_US.properties")
+                else
+                    return@let it
+            }
 
         try {
             Files.newInputStream(path).use { input ->
