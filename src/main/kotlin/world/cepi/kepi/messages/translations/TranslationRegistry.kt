@@ -100,7 +100,7 @@ object TranslationRegistry {
             .let {
                 // If the path is not found attempt to use en_US instead
                 if (!it.exists())
-                    return@let pathNamespace.resolve("bundle_en_US.properties")
+                    return@let pathNamespace.resolve("bundle_en_us.properties")
                 else
                     return@let it
             }
