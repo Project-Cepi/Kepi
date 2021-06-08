@@ -5,7 +5,7 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.Command
 import world.cepi.kstom.adventure.asMini
 
-class Help(val messages: String, name: String = "help") : Command(name) {
+open class Help(val messages: String, name: String = "help", vararg aliases: String = arrayOf("?")) : Command(name, *aliases) {
 
     companion object {
         const val arm = "─"

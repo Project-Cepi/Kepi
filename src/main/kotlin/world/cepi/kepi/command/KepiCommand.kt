@@ -15,7 +15,8 @@ object KepiCommand : Command("kepi") {
         addSyntax(status) { sender ->
 
             sender.sendMessage(
-                Component.text("Translations: ", NamedTextColor.GRAY).append(TranslationRegistry.loadingStatus.component)
+                Component.text("Translations: ", NamedTextColor.GRAY)
+                    .append(TranslationRegistry.loadingStatus.component)
             )
 
         }
