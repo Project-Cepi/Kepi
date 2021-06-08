@@ -8,7 +8,6 @@ import kotlin.io.path.ExperimentalPathApi
 
 class Kepi : Extension() {
 
-    @ExperimentalPathApi
     override fun initialize() {
 
         try {

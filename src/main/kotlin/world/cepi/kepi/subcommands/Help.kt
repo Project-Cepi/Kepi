@@ -3,8 +3,9 @@ package world.cepi.kepi.subcommands
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.Command
+import world.cepi.kstom.adventure.asMini
 
-class Help(vararg val messages: Component, name: String = "help") : Command(name) {
+class Help(val messages: String, name: String = "help") : Command(name) {
 
     companion object {
         const val arm = "─"
@@ -15,8 +16,8 @@ class Help(vararg val messages: Component, name: String = "help") : Command(name
         setDefaultExecutor { sender, _ ->
             sender.sendMessage(Component.text(arm.repeat(armLength), NamedTextColor.DARK_GRAY))
 
-            messages.forEach {
-                sender.sendMessage(Component.text().color(NamedTextColor.GRAY).append(it))
+            messages.split("\n").forEach {
+                sender.sendMessage(Component.text().color(NamedTextColor.GRAY).append(it.asMini()))
             }
 
             sender.sendMessage(Component.text(arm.repeat(armLength), NamedTextColor.DARK_GRAY))

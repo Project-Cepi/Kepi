@@ -32,7 +32,6 @@ object TranslationRegistry {
     /**
      * Initializes and unpacks the translations necessary
      */
-    @ExperimentalPathApi
     internal fun grab() {
         try {
             if (!translationsFolder.exists()) translationsFolder.createDirectories()
