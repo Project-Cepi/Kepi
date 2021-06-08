@@ -25,3 +25,12 @@ open class Help(val messages: String, name: String = "help", vararg aliases: Str
     }
 
 }
+
+fun Command.applyHelp(messages: String, name: String = "help", vararg aliases: String = arrayOf("?")) {
+
+    val help = Help(messages, name, *aliases)
+
+    this.defaultExecutor = help.defaultExecutor
+
+    this.addSubcommand(help)
+}
