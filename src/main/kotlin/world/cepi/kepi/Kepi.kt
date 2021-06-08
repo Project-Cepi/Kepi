@@ -4,6 +4,8 @@ import net.minestom.server.MinecraftServer
 import net.minestom.server.extensions.Extension
 import world.cepi.kepi.command.KepiCommand
 import world.cepi.kepi.messages.translations.TranslationRegistry
+import world.cepi.kstom.command.register
+import world.cepi.kstom.command.unregister
 import kotlin.io.path.ExperimentalPathApi
 
 class Kepi : Extension() {
@@ -17,14 +19,14 @@ class Kepi : Extension() {
             MinecraftServer.getExceptionManager().handleException(exception)
         }
 
-        MinecraftServer.getCommandManager().register(KepiCommand)
+        KepiCommand.register()
 
         logger.info("[Kepi] has been enabled!")
     }
 
     override fun terminate() {
 
-        MinecraftServer.getCommandManager().unregister(KepiCommand)
+        KepiCommand.unregister()
 
         logger.info("[Kepi] has been disabled!")
     }

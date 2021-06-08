@@ -16,7 +16,7 @@ class Help(val messages: String, name: String = "help") : Command(name) {
         setDefaultExecutor { sender, _ ->
             sender.sendMessage(Component.text(arm.repeat(armLength), NamedTextColor.DARK_GRAY))
 
-            messages.split("\n").forEach {
+            messages.trim().split("\n").forEach {
                 sender.sendMessage(Component.text().color(NamedTextColor.GRAY).append(it.asMini()))
             }
 
