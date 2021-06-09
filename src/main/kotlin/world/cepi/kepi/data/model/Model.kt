@@ -30,7 +30,6 @@ interface Model<T, D> {
 
         const val default = "default"
         val defaultID = ID(default)
-        val defaultNamespace = default.asNamespace()
 
         val jsonParser = Json {
 

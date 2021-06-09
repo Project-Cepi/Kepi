@@ -26,11 +26,24 @@ open class Help(val messages: String, name: String = "help", vararg aliases: Str
 
 }
 
-fun Command.applyHelp(messages: String, name: String = "help", vararg aliases: String = arrayOf("?")) {
+/**
+ * Applies the help subcommand to this command
+ *
+ * @param messages The messages to send to the player
+ * @param name The name of the subcommand
+ * @param aliases The aliases of the subcommand
+ * @param shouldAddSubcommand If the subcommand should be added in the first place.
+ */
+fun Command.applyHelp(
+    messages: String,
+    name: String = "help",
+    vararg aliases: String = arrayOf("?"),
+    shouldAddSubcommand: Boolean = true
+) {
 
     val help = Help(messages, name, *aliases)
 
     this.defaultExecutor = help.defaultExecutor
 
-    this.addSubcommand(help)
+    if (shouldAddSubcommand) this.addSubcommand(help)
 }
