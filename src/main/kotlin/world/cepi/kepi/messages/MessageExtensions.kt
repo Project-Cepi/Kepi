@@ -62,4 +62,4 @@ fun CommandSender.sendFormattedMessage(component: Component, vararg params: Comp
  * @param params The replacers, usually used to replace a placeholder in a translation message
  */
 fun CommandSender.sendFormattedTranslatableMessage(namespace: String, key: String, vararg params: Component = arrayOf()) =
-    this.sendFormattedMessage(this.formatTranslableMessage(namespace, key), *params)
+    this.sendFormattedMessage(this.formatTranslableMessage(namespace, key,  *params))
