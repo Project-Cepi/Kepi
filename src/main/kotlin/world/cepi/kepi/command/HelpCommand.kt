@@ -1,4 +1,6 @@
-package world.cepi.kepi.subcommands
+package world.cepi.kepi.command
+
+import world.cepi.kepi.command.subcommand.Help
 
 internal object HelpCommand: Help("""
     Need help with a command? Run

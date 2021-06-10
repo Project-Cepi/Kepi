@@ -14,7 +14,10 @@ fun CommandSender.formatTranslableMessage(
     key: String,
     vararg params: Component = arrayOf()
 ): Component =
-    Component.text(
-        TranslationRegistry[namespace, key, (this as? Player)?.settings?.locale ?: "en_US"]
-            ?: "$namespace.$key"
-    ).formatPercent(*params)
+    Component.text(this.translableMessage(namespace, key)).formatPercent(*params)
+
+fun CommandSender.translableMessage(
+    namespace: String = "common",
+    key: String
+) = TranslationRegistry[namespace, key, (this as? Player)?.settings?.locale ?: "en_US"]
+    ?: "$namespace.$key"
