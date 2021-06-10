@@ -10,15 +10,16 @@ import world.cepi.kepi.messages.translations.translableMessage
 import world.cepi.kstom.adventure.asMini
 
 open class Help(
-    name: String = "help",
     val translationLambda: (sender: CommandSender) -> String,
-    vararg aliases: String = arrayOf("?")
-) : Command(name, *aliases) {
+) : Command("help", "?") {
 
     constructor(
         messages: String,
-        name: String = "help", vararg aliases: String = arrayOf("?")
-    ): this(name, { _ -> messages }, *aliases)
+    ): this({ _ -> messages })
+
+    constructor(
+        namespace: String, key: String,
+    ): this({ sender -> sender.translableMessage(namespace, key) })
 
     companion object {
         const val arm = "─"
@@ -42,19 +43,15 @@ open class Help(
 /**
  * Applies the help subcommand to this command
  *
- * @param name The name of the subcommand
- * @param aliases The aliases of the subcommand
- * @param shouldAddSubcommand If the subcommand should be added in the first place.
  * @param translationLambda The messages to send to the player
+ * @param shouldAddSubcommand If the subcommand should be added in the first place.
  */
 fun Command.applyHelp(
-    name: String = "help",
-    vararg aliases: String = arrayOf("?"),
     shouldAddSubcommand: Boolean = true,
     translationLambda: (CommandSender) -> String
 ) {
 
-    val help = Help(name, translationLambda, *aliases)
+    val help = Help(translationLambda)
 
     this.defaultExecutor = help.defaultExecutor
 
@@ -62,16 +59,12 @@ fun Command.applyHelp(
 }
 
 fun Command.applyHelp(
-    name: String = "help",
-    vararg aliases: String = arrayOf("?"),
-    shouldAddSubcommand: Boolean = true,
     translationNamespace: String,
-    translationKey: String
+    translationKey: String,
+    shouldAddSubcommand: Boolean = true,
 ) {
 
-    val help = Help(name, { sender ->
-        sender.translableMessage(translationNamespace, translationKey)
-    }, *aliases)
+    val help = Help(translationNamespace, translationKey)
 
     this.defaultExecutor = help.defaultExecutor
 

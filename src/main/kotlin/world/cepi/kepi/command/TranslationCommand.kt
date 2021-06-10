@@ -5,7 +5,7 @@ import world.cepi.kepi.command.subcommand.applyHelp
 
 object TranslationCommand : Command("translation") {
     init {
-        applyHelp {
+        applyHelp { _ ->
             """
                 Cepi supports translations with its translation
                 manager! If you want to help with translations,
