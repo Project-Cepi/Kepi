@@ -34,7 +34,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
 
     // Compile Minestom into project
-    compileOnly("com.github.Project-Cepi:Minestom:15cfea6f9a")
+    compileOnly("com.github.Minestom:Minestom:15cfea6f9a")
 
     // Use kotlinx serialization
     compileOnly("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.0.1")
