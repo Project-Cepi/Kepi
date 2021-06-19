@@ -40,4 +40,14 @@ suspend fun Player.prompt(prompt: IncompletePrompt, timeout: Long = -1, throwCan
     }
 }
 
-fun Player.promptBlocking(prompt: IncompletePrompt, timeout: Long) = runBlocking { prompt(prompt, timeout) }
+fun Player.promptBlocking(
+    prompt: IncompletePrompt,
+    timeout: Long,
+    throwCancelled: Boolean = false
+) = runBlocking { prompt(prompt, timeout, throwCancelled) }
+fun Player.promptAsync(
+    prompt: IncompletePrompt,
+    timeout: Long,
+    throwCancelled: Boolean = false,
+    scope: CoroutineScope = GlobalScope)
+= scope.async { prompt(prompt, timeout, throwCancelled) }
