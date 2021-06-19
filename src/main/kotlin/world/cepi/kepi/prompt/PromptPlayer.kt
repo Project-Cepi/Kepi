@@ -7,7 +7,7 @@ import net.kyori.adventure.text.event.ClickEvent
 import net.minestom.server.command.CommandSender
 import net.minestom.server.entity.Player
 
-suspend fun CommandSender.prompt(prompt: Prompt, timeout: Long = -1): Prompt {
+suspend fun Player.prompt(prompt: IncompletePrompt, timeout: Long = -1): CompletePrompt {
     val promptText = prompt.options.map {
         it.text.clickEvent(ClickEvent.runCommand("acceptPrompt ${it.id}"))
     }
@@ -17,7 +17,7 @@ suspend fun CommandSender.prompt(prompt: Prompt, timeout: Long = -1): Prompt {
         if (index != 0) finalPrompt.append(textComponent)
     }
 
-    val rendezvousChannel = Channel<Prompt>(0)
+    val rendezvousChannel = Channel<CompletePrompt>(0)
     activePrompts[prompt] = rendezvousChannel
 
     this.sendMessage(finalPrompt)
@@ -25,4 +25,4 @@ suspend fun CommandSender.prompt(prompt: Prompt, timeout: Long = -1): Prompt {
     return rendezvousChannel.receive()
 }
 
-fun CommandSender.promptBlocking(prompt: Prompt, timeout: Long) = runBlocking { prompt(prompt, timeout) }
+fun Player.promptBlocking(prompt: IncompletePrompt, timeout: Long) = runBlocking { prompt(prompt, timeout) }
