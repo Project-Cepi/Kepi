@@ -31,6 +31,8 @@ dependencies {
     // Use the Kotlin reflect library.
     compileOnly(kotlin("reflect"))
 
+    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+
     // Use the JUpiter test library.
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
 
