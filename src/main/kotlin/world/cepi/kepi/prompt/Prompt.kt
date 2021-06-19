@@ -13,7 +13,7 @@ class Prompt(
     vararg val options: PromptOption,
 )
 
-private val activePrompts: MutableMap<Prompt, Channel<Prompt>> = mutableMapOf()
+internal val activePrompts: MutableMap<Prompt, Channel<Prompt>> = mutableMapOf()
 
 class PromptOption(
     val text: TextComponent,
