@@ -46,6 +46,11 @@ class CompletePrompt (
 
 internal val activePrompts: MutableMap<IncompletePrompt, Channel<CompletePrompt>> = mutableMapOf()
 
+private val playerPrompts: MutableMap<Player, IncompletePrompt> = mutableMapOf()
+var Player.activePrompt: IncompletePrompt?
+    get() = playerPrompts[this]
+    set(value) { if (value != null) playerPrompts[this] = value }
+
 class PromptOption(
     val text: TextComponent,
     val value: String
