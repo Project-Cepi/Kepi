@@ -12,10 +12,31 @@ import java.util.*
 
 class IncompletePrompt(
     vararg val options: PromptOption,
-)
+) {
+    val id = UUID.randomUUID()
 
-@Deprecated("Use the actual IncompletePrompt instead")
-internal typealias Prompt = IncompletePrompt
+    init {
+        options.forEachIndexed { index, option -> option.optionNumber = index }
+
+        val choiceArgument = ArgumentType.Integer("choice")
+            .between(options.first().optionNumber!!, options.last().optionNumber!!)
+
+        PromptCommand.addSyntax(choiceArgument) { sender, args ->
+            if (sender.isConsole) return@addSyntax
+
+            val choiceId: Int = args[choiceArgument]
+            val prompt = activePrompts.keys.firstOrNull { it.options.any { it.optionNumber == choiceId } } ?: return@addSyntax
+            val chosenOption = prompt.options.first { it.id == choiceId }
+
+            val newPrompt = CompletePrompt(
+                chosenOption,
+                sender.asPlayer(),
+                prompt.options.filter { it != chosenOption }
+            )
+
+            activePrompts[prompt]?.trySendBlocking(newPrompt)
+    }
+}
 
 class CompletePrompt (
     val chosenOption: PromptOption,
@@ -29,24 +50,9 @@ class PromptOption(
     val text: TextComponent,
     val value: String
 ) {
-    var isChosen = false
-    val id: UUID = UUID.randomUUID()
+    var optionNumber: Int? = null
 
     init {
-        PromptCommand.addSyntax(ArgumentType.Word("choice").from(id.toString())) { sender, args ->
-            if (sender.isConsole) return@addSyntax
-
-            val choiceId = UUID.fromString(args["choice"])
-            val prompt = activePrompts.keys.firstOrNull { it.options.any { it.id == choiceId } } ?: return@addSyntax
-            val chosenOption = prompt.options.first { it.id == choiceId }
-
-            val newPrompt = CompletePrompt(
-                chosenOption,
-                sender.asPlayer(),
-                prompt.options.filter { it != chosenOption }
-            )
-
-            activePrompts[prompt]?.trySendBlocking(newPrompt)
 
         }
     }
