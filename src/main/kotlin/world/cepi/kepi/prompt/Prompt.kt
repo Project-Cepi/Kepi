@@ -23,10 +23,11 @@ class IncompletePrompt(
 
         PromptCommand.addSyntax(choiceArgument) { sender, args ->
             if (sender.isConsole) return@addSyntax
+            val player = sender as Player
 
             val choiceId: Int = args[choiceArgument]
-            val prompt = activePrompts.keys.firstOrNull { it.options.any { it.optionNumber == choiceId } } ?: return@addSyntax
-            val chosenOption = prompt.options.first { it.id == choiceId }
+            val prompt = player.activePrompt ?: return@addSyntax
+            val chosenOption = prompt.options.first { it.optionNumber == choiceId }
 
             val newPrompt = CompletePrompt(
                 chosenOption,
@@ -35,7 +36,9 @@ class IncompletePrompt(
             )
 
             activePrompts[prompt]?.trySendBlocking(newPrompt)
+        }
     }
+
 }
 
 class CompletePrompt (
@@ -56,9 +59,4 @@ class PromptOption(
     val value: String
 ) {
     var optionNumber: Int? = null
-
-    init {
-
-        }
-    }
 }
