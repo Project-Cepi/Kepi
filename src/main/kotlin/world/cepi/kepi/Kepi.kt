@@ -6,6 +6,7 @@ import world.cepi.kepi.command.KepiCommand
 import world.cepi.kepi.messages.translations.TranslationRegistry
 import world.cepi.kepi.command.HelpCommand
 import world.cepi.kepi.command.TranslationCommand
+import world.cepi.kepi.prompt.PromptCommand
 import world.cepi.kstom.command.register
 import world.cepi.kstom.command.unregister
 
@@ -23,6 +24,7 @@ class Kepi : Extension() {
         KepiCommand.register()
         HelpCommand.register()
         TranslationCommand.register()
+        PromptCommand.register()
 
         logger.info("[Kepi] has been enabled!")
     }
