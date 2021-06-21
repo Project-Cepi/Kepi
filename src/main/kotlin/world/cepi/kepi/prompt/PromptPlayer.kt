@@ -12,7 +12,7 @@ import java.util.concurrent.TimeoutException
 
 suspend fun Player.prompt(prompt: IncompletePrompt, timeout: Long = -1, throwCancelled: Boolean = false): CompletePrompt? {
     val promptText = prompt.options.map {
-        it.text.clickEvent(ClickEvent.runCommand("acceptPrompt ${it.id}"))
+        it.text.clickEvent(ClickEvent.runCommand("acceptPrompt ${it.optionNumber}"))
     }
 
     val finalPrompt = promptText[0]
@@ -24,6 +24,7 @@ suspend fun Player.prompt(prompt: IncompletePrompt, timeout: Long = -1, throwCan
     activePrompts[prompt] = rendezvousChannel
 
     this.sendMessage(finalPrompt)
+    this.activePrompt = prompt
 
     suspend fun recieveRendezvous(): CompletePrompt? = try {
         rendezvousChannel.receive()
