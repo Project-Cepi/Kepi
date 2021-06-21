@@ -24,20 +24,24 @@ suspend fun Player.prompt(prompt: IncompletePrompt, timeout: Long = -1, throwCan
     activePrompts[prompt] = rendezvousChannel
 
     this.sendMessage(finalPrompt)
-    if (timeout != -1L) {
-        coroutineScope { launch {
-            delay(timeout)
-            rendezvousChannel.cancel(CancellationException("Prompt timed out", TimeoutException()))
-        } }
+
+    suspend fun recieveRendezvous(): CompletePrompt? = try {
+        rendezvousChannel.receive()
+    } catch (e: ClosedReceiveChannelException) {
+        if (!throwCancelled) null else throw e
+    }
+
+    val deferredPrompt = coroutineScope {
+        async {
+            if (timeout != -1L) withTimeout(timeout) {
+                recieveRendezvous()
+            } else recieveRendezvous()
+        }.await()
     }
 
     this.addEventCallback(PlayerDisconnectEvent::class.java) { rendezvousChannel.cancel() }
 
-    return try {
-        rendezvousChannel.receive()
-    } catch (error: ClosedReceiveChannelException) {
-        if (!throwCancelled) return null else throw error
-    }
+    return deferredPrompt
 }
 
 fun Player.promptBlocking(
