@@ -1,7 +1,7 @@
 package world.cepi.kepi.messages
 
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -10,8 +10,8 @@ class FormattedMessagesTest {
     @Test
     fun `check input of one param`() {
         assertEquals(
-            PlainComponentSerializer
-                .plain()
+            PlainTextComponentSerializer
+                .plainText()
                 .serialize(
                     Component.text("Hello %1!").formatPercent(
                         Component.text("World")
@@ -22,8 +22,8 @@ class FormattedMessagesTest {
     @Test
     fun `check input of single-digit param`() {
         assertEquals(
-            PlainComponentSerializer
-                .plain()
+            PlainTextComponentSerializer
+                .plainText()
                 .serialize(
                     Component.text("Hey %1, %2, and %3!").formatPercent(
                         Component.text("A"),
@@ -36,8 +36,8 @@ class FormattedMessagesTest {
     @Test
     fun `check input of multi-digit param`() {
         assertEquals(
-            PlainComponentSerializer
-                .plain()
+            PlainTextComponentSerializer
+                .plainText()
                 .serialize(
                     Component.text("Letters: %1%2%3%4%5%6%7%8%9%10%11%12").formatPercent(
                         Component.text("A"), // 1
@@ -59,8 +59,8 @@ class FormattedMessagesTest {
     @Test
     fun `make sure !! works correctly`() {
         assertEquals(
-            PlainComponentSerializer
-                .plain()
+            PlainTextComponentSerializer
+                .plainText()
                 .serialize(
                     Component.text("Hello %1!").formatPercent()
                 ), "Hello !!!")
