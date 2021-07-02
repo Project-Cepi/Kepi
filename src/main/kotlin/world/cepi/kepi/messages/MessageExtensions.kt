@@ -56,6 +56,22 @@ fun CommandSender.sendFormattedMessage(component: Component, vararg params: Comp
     )
 
 /**
+ * Sends an error message to the corresponding sender.
+ *
+ * @param component The origin component, this just appends the prefix.
+ */
+fun CommandSender.sendErrorMessage(component: Component, vararg params: Component = arrayOf()) =
+    this.sendMessage(
+        Component.text("\uEff7")
+            .append(Component.space())
+            .append(
+                Component.text()
+                    .color(NamedTextColor.RED)
+                    .append(component.formatPercent(*params))
+            )
+    )
+
+/**
  * Sends a formatted & translated message to the corresponding sender.
  *
  * @param message The origin message, usually grabbed from the list of translations
@@ -63,3 +79,12 @@ fun CommandSender.sendFormattedMessage(component: Component, vararg params: Comp
  */
 fun CommandSender.sendFormattedTranslatableMessage(namespace: String, key: String, vararg params: Component = arrayOf()) =
     this.sendFormattedMessage(this.formatTranslableMessage(namespace, key,  *params))
+
+/**
+ * Sends a formatted & translated message to the corresponding sender.
+ *
+ * @param message The origin message, usually grabbed from the list of translations
+ * @param params The replacers, usually used to replace a placeholder in a translation message
+ */
+fun CommandSender.sendErrorTranslatableMessage(namespace: String, key: String, vararg params: Component = arrayOf()) =
+    this.sendErrorMessage(this.formatTranslableMessage(namespace, key,  *params))
