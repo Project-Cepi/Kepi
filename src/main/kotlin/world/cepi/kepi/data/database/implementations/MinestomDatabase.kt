@@ -3,19 +3,17 @@ package world.cepi.kepi.data.database.implementations
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
-import net.minestom.server.MinecraftServer
-import net.minestom.server.storage.systems.FileStorageSystem
 import world.cepi.kepi.data.DataNamespace
 import world.cepi.kepi.data.ID
 import world.cepi.kepi.data.database.DatabaseHandler
-import java.util.concurrent.ConcurrentHashMap
+import world.cepi.kstom.Manager
 
 /**
  * Database located purely in memory. Should be used for testing only.
  */
 class MinestomDatabase(uniqueID: ID) : DatabaseHandler<JsonElement> {
 
-    val storage = MinecraftServer.getStorageManager().getLocation(uniqueID.id)!!
+    val storage = Manager.storage.getLocation(uniqueID.id)!!
 
     override fun put(namespace: DataNamespace, id: ID, data: JsonElement): Boolean {
         storage.set((namespace + id.id).toString(), data.toString().encodeToByteArray())

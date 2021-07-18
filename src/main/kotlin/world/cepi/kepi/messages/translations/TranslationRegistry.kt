@@ -1,6 +1,5 @@
 package world.cepi.kepi.messages.translations
 
-import net.minestom.server.MinecraftServer
 import world.cepi.kepi.SystemLoadStatus
 import world.cepi.kstom.Manager
 import java.io.BufferedInputStream
@@ -74,7 +73,7 @@ object TranslationRegistry {
 
         } catch (exception: Exception) {
             Manager.extension.getExtension("Kepi")?.logger?.error("An unexpected error occured loading translations.")
-            MinecraftServer.getExceptionManager().handleException(exception)
+            Manager.exception.handleException(exception)
             loadingStatus = SystemLoadStatus.ERROR
         }
     }
