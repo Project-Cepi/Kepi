@@ -1,6 +1,7 @@
 package world.cepi.kepi.command.subcommand
 
 import net.minestom.server.command.builder.Command
+import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.exception.ArgumentSyntaxException
 import world.cepi.kstom.command.SyntaxContext
@@ -29,7 +30,9 @@ open class KepiMetaSubcommand<T : Any>(
     addLambda: SyntaxContext.(T) -> Unit,
 
     /** What to execute when meta is removed */
-    removeLambda: SyntaxContext.(KClass<out T>) -> Unit
+    removeLambda: SyntaxContext.(KClass<out T>) -> Unit,
+
+    vararg previousArgs: Argument<*>
 ) : Command(name) {
 
     init {
@@ -50,13 +53,13 @@ open class KepiMetaSubcommand<T : Any>(
 
             val clazzArgumentName = clazz.simpleName!!.lowercase().dropLast(4)
 
-            syntaxes.applySyntax(this, set, clazzArgumentName.literal()) { instance ->
+            syntaxes.applySyntax(this, *previousArgs, set, clazzArgumentName.literal()) { instance ->
                 addLambda(this, instance)
             }
 
         }
 
-        addSyntax(remove, metaClass) {
+        addSyntax(*previousArgs, remove, metaClass) {
             removeLambda(this, context[metaClass])
         }
     }
