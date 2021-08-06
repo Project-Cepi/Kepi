@@ -1,5 +1,8 @@
 {
   "entrypoint": "world.cepi.kepi.Kepi",
   "name": "Kepi",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": [
+    "KStom"
+  ]
 }

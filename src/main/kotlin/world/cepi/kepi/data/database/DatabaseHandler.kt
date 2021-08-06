@@ -1,6 +1,5 @@
 package world.cepi.kepi.data.database
 
-import kotlinx.serialization.json.JsonElement
 import world.cepi.kepi.data.DataNamespace
 import world.cepi.kepi.data.ID
 
