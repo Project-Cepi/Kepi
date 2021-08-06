@@ -27,10 +27,10 @@ open class KepiMetaSubcommand<T : Any>(
     dropString: String = name,
 
     /*+ What to execute when meta is added */
-    addLambda: SyntaxContext.(T) -> Unit,
+    addLambda: SyntaxContext.(T, String) -> Unit,
 
     /** What to execute when meta is removed */
-    removeLambda: SyntaxContext.(KClass<out T>) -> Unit,
+    removeLambda: SyntaxContext.(KClass<out T>, String) -> Unit,
 
     vararg previousArgs: Argument<*>
 ) : Command(name) {
@@ -51,16 +51,19 @@ open class KepiMetaSubcommand<T : Any>(
         sealedRootClass.sealedSubclasses.forEach { clazz ->
             val syntaxes = generateSyntaxes(clazz)
 
-            val clazzArgumentName = clazz.simpleName!!.lowercase().dropLast(4)
+            val clazzArgumentName = clazz.simpleName!!.lowercase().dropLast(dropString.length)
 
             syntaxes.applySyntax(this, *previousArgs, set, clazzArgumentName.literal()) { instance ->
-                addLambda(this, instance)
+                addLambda(this, instance, clazzArgumentName)
             }
 
         }
 
         addSyntax(*previousArgs, remove, metaClass) {
-            removeLambda(this, context[metaClass])
+
+            val clazzArgumentName = context[metaClass].simpleName!!.lowercase().dropLast(dropString.length)
+
+            removeLambda(this, context[metaClass], clazzArgumentName)
         }
     }
 
