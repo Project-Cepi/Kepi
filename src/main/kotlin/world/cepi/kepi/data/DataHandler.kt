@@ -8,12 +8,12 @@ import world.cepi.kepi.data.model.Model
  *
  * Allows for manipulation of data via a [Model]
  */
-interface DataHandler<D> {
+interface DataHandler {
 
     /**
      * Represents the [DatabaseHandler] this [DataHandler] uses
      */
-    var databaseHandler: DatabaseHandler<D>
+    var databaseHandler: DatabaseHandler
 
     /**
      * Puts an [item] in this [DataHandler]
@@ -21,11 +21,15 @@ interface DataHandler<D> {
      * @param model The model object to use.
      * @param item The item to use
      */
-    operator fun <T> set(model: Model<T, D>, item: T): Boolean {
+    operator fun <T> set(model: Model<T>, item: T): Boolean {
 
         val data = model.asData(item)
 
-        return databaseHandler.put(model.dataNamespace, id = data.first, data = data.second)
+        return databaseHandler.put(model.dataNamespace with data.first, data = data.second)
+    }
+
+    operator fun <T> get(model: Model<T>, id: String): T? {
+        return model.asObject(databaseHandler.get(model.dataNamespace with id) ?: return null)
     }
 
     /**
@@ -34,9 +38,9 @@ interface DataHandler<D> {
      * @param model The model object to base the ID off of
      * @param id The ID where the object for removal is located at.
      */
-    fun <T> erase(model: Model<T, D>, id: ID): Boolean {
+    fun <T> erase(model: Model<T>, id: String): Boolean {
 
-        return databaseHandler.erase(model.dataNamespace, id)
+        return databaseHandler.erase(model.dataNamespace with id)
 
     }
 

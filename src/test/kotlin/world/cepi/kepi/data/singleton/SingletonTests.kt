@@ -1,6 +1,7 @@
 package world.cepi.kepi.data.singleton
 
 import kotlinx.serialization.InternalSerializationApi
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class SingletonTests {
@@ -11,7 +12,7 @@ class SingletonTests {
 
         val square = Square(5, 5)
 
-        assert(square == SquareModel.asObject(SquareModel.asData(square).second))
+        assertEquals(square, SquareModel.asObject(SquareModel.asData(square).second))
     }
 
 }

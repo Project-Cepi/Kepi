@@ -12,25 +12,18 @@ import java.util.concurrent.ConcurrentHashMap
  *
  * [main] is the needed function
  */
-open class DataHandlerFactory<D>(val databaseHandlerFactory: (DataNamespace) -> DatabaseHandler<D>) {
+open class DataHandlerFactory(val databaseHandlerFactory: (DataNamespace) -> DatabaseHandler) {
 
     companion object {
         const val mainDataHandler = "main"
     }
 
-    val handlers: Map<DataNamespace, DataHandler<D>> = ConcurrentHashMap()
+    private val handlers: MutableMap<DataNamespace, DataHandler> = ConcurrentHashMap()
 
-    fun of(namespace: DataNamespace): DataHandler<D> {
+    operator fun get(namespace: DataNamespace): DataHandler = if (!handlers.containsKey(namespace)) object : DataHandler {
+        override var databaseHandler: DatabaseHandler = databaseHandlerFactory(namespace)
+    } else handlers[namespace]!!
 
-        handlers as MutableMap
-
-        return if (!handlers.containsKey(namespace)) object : DataHandler<D> {
-            override var databaseHandler: DatabaseHandler<D> = databaseHandlerFactory(namespace)
-        }
-        else handlers[namespace]!!
-
-    }
-
-    fun main(): DataHandler<D> = of(mainDataHandler.asNamespace())
+    val main by lazy { this[mainDataHandler.asNamespace()] }
 
 }

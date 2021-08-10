@@ -7,7 +7,7 @@ class NamespaceTests {
 
     @Test
     fun `namespace should be parsed properly`() {
-        assert(DataNamespace("hello", "world").toString() == "hello.world")
+        assert(DataNamespace("hello", "world").toString() == "hello_world")
     }
 
 }

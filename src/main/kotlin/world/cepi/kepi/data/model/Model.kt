@@ -1,11 +1,7 @@
 package world.cepi.kepi.data.model
 
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
 import world.cepi.kepi.data.DataNamespace
-import world.cepi.kepi.data.ID
-import world.cepi.kepi.data.asNamespace
 
 /**
  * Represents a storable object, anywhere.
@@ -24,16 +20,13 @@ import world.cepi.kepi.data.asNamespace
  * HIGHLY reccomended to use a kotlin Object
  *
  */
-interface Model<T, D> {
+interface Model<T> {
 
     companion object {
 
         const val default = "default"
-        val defaultID = ID(default)
 
-        val jsonParser = Json {
-
-        }
+        val jsonParser = Json
     }
 
     /**
@@ -46,7 +39,7 @@ interface Model<T, D> {
      * EX, if there is a LevelModel for a Player,
      * depend on a PlayerModel.
      */
-    val dependsOn: Model<*, *>?
+    val dependsOn: Model<*>?
         get() = null
 
     /**
@@ -57,7 +50,7 @@ interface Model<T, D> {
      * @return A pair of ID to valid JSON data (json will be parsed to whatever)
      * Reccomended to use kotlinx.serialization.
      */
-    fun asData(item: T): Pair<ID, D>
+    fun asData(item: T): Pair<String, String>
 
     /**
      * Data into object T
@@ -67,7 +60,7 @@ interface Model<T, D> {
      * @return The [T] object.
      * Reccomended to use kotlinx.serialization.
      */
-    fun asObject(data: D): T
+    fun asObject(data: String): T
 
     /**
      * Represents if all data returned from [asData] will have the same ID.

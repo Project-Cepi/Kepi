@@ -7,33 +7,36 @@ import javax.xml.crypto.Data
  *
  * EX:
  *
- * mob.registry
+ * mob_registry
  *
- * mob.registry is the namespace, nested in (registry of (mob)),
+ * mob_registry is the namespace, nested in (registry of (mob)),
  */
-@JvmInline
-value class DataNamespace(
+class DataNamespace(
     /**
      * List of keys, in the example above it would be
      *
      * > mob
      * > registry
      */
-    val keys: List<String> = listOf()
+    vararg val keys: String
 ) {
 
-    constructor(vararg keys: String): this(keys.toList())
+    constructor(keys: List<String>): this(*keys.toTypedArray())
 
     operator fun plus(key: String): DataNamespace =
-        DataNamespace(keys + key)
+        DataNamespace(*keys, key)
 
     operator fun plus(namespace: DataNamespace): DataNamespace =
-        DataNamespace(keys + namespace.keys)
+        DataNamespace(*keys, *namespace.keys)
+
+    override fun equals(other: Any?) = keys == other
 
     override fun toString(): String {
-        return keys.joinToString(".")
+        return keys.joinToString("_")
     }
 
 }
 
-fun String.asNamespace() = DataNamespace(this.split("."))
+fun String.asNamespace() = DataNamespace(this.split("_"))
+
+infix fun DataNamespace.with(id: String) = this.toString() + id
