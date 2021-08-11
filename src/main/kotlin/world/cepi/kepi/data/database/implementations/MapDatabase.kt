@@ -12,19 +12,15 @@ class MapDatabase(
 
     /** String (namespace) that stores (namespaces) paired to string (data) */
 
-    override fun erase(key: String): Boolean {
+    override fun erase(key: String) {
         map.remove(key)
-
-        return true
     }
 
     override fun get(key: String): String? {
         return map[key]
     }
 
-    override fun put(key: String, data: String): Boolean {
+    override fun put(key: String, data: String) {
         map[key] = data
-
-        return true
     }
 }

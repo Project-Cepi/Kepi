@@ -1,7 +1,5 @@
 package world.cepi.kepi.data.database
 
-import world.cepi.kepi.data.DataNamespace
-
 /**
  * Represents a simple database handler. Can be hooked to anything -- local file storage, local dbs, online dbs, etc.
  */
@@ -13,14 +11,14 @@ interface DatabaseHandler {
      * @param key the key of the data
      * @param data The data as JSON (string)
      */
-    fun put(key: String, data: String): Boolean
+    fun put(key: String, data: String)
 
     /**
      * Erase data from a namespace + id
      *
      * @param key the key of the data
      */
-    fun erase(key: String): Boolean
+    fun erase(key: String)
 
     /**
      * Grabs data from a namespace + id
