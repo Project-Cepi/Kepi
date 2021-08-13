@@ -18,7 +18,7 @@ open class DataHandlerFactory(val databaseHandlerFactory: (DataNamespace) -> Dat
         const val mainDataHandler = "main"
     }
 
-    private val handlers: MutableMap<DataNamespace, DataHandler> = ConcurrentHashMap()
+    private val handlers: ConcurrentHashMap<DataNamespace, DataHandler> = ConcurrentHashMap()
 
     operator fun get(namespace: DataNamespace): DataHandler = if (!handlers.containsKey(namespace)) object : DataHandler {
         override var databaseHandler: DatabaseHandler = databaseHandlerFactory(namespace)

@@ -35,6 +35,10 @@ class DataNamespace(
         return keys.joinToString("_")
     }
 
+    override fun hashCode(): Int {
+        return keys.contentHashCode()
+    }
+
 }
 
 fun String.asNamespace() = DataNamespace(this.split("_"))

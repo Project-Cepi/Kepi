@@ -25,6 +25,7 @@ class MultipleTests {
 
         TestDataHandler.main[SquareOwnerModel] = otherSquareOwner
         assertEquals(otherSquareOwner, TestDataHandler.main[SquareOwnerModel, "jeff"])
+        assertEquals(otherSquareOwner, TestDataHandler.main[SquareOwnerModel, 1])
     }
 
 }

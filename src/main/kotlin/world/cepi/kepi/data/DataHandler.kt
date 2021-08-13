@@ -2,6 +2,7 @@ package world.cepi.kepi.data
 
 import world.cepi.kepi.data.database.DatabaseHandler
 import world.cepi.kepi.data.model.Model
+import java.lang.Integer.parseInt
 
 /**
  * Handles data with a backing [DatabaseHandler]
@@ -25,11 +26,23 @@ interface DataHandler {
 
         val data = model.asData(item)
 
-        databaseHandler.put(model.dataNamespace with data.first, data = data.second)
+        if (!model.noIndexes) {
+            val lastIndex = parseInt(databaseHandler[model.dataNamespace.toString() + "::lastIndex"] ?: "0")
+
+            databaseHandler[model.dataNamespace.toString() + "::$lastIndex"] = data.first
+
+            databaseHandler[model.dataNamespace.toString() + "::lastIndex"] = (lastIndex + 1).toString()
+        }
+
+        databaseHandler.set(model.dataNamespace with data.first, data = data.second)
+    }
+
+    operator fun <T> get(model: Model<T>, index: Int): T? {
+        return get(model, databaseHandler[model.dataNamespace.toString() + "::$index"] ?: return null)
     }
 
     operator fun <T> get(model: Model<T>, id: String): T? {
-        return model.asObject(databaseHandler.get(model.dataNamespace with id) ?: return null)
+        return model.asObject(databaseHandler[model.dataNamespace with id] ?: return null)
     }
 
     /**

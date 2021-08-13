@@ -69,4 +69,16 @@ interface Model<T> {
     val isSingleton: Boolean
         get() = false
 
+    /**
+     * If this model should not be indexed (allows for lists)
+     */
+    val noIndexes: Boolean
+        get() = false
+
+    /**
+     * If this model should use UUIDs as indexes
+     */
+    val uuidIndexes: Boolean
+        get() = false
+
 }

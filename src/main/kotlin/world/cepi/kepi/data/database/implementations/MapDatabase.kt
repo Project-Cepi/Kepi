@@ -16,11 +16,11 @@ class MapDatabase(
         map.remove(key)
     }
 
-    override fun get(key: String): String? {
+    override operator fun get(key: String): String? {
         return map[key]
     }
 
-    override fun put(key: String, data: String) {
+    override operator fun set(key: String, data: String) {
         map[key] = data
     }
 }
