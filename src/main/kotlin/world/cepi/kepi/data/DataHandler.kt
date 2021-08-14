@@ -45,6 +45,12 @@ interface DataHandler {
         return model.asObject(databaseHandler[model.dataNamespace with id] ?: return null)
     }
 
+    fun <T> getAll(model: Model<T>): List<Pair<T, Int>> {
+        val lastIndex = parseInt(databaseHandler[model.dataNamespace.toString() + "::lastIndex"] ?: "0")
+
+        return (0..lastIndex).mapNotNull { (this[model, it] ?: return@mapNotNull null) to it }
+    }
+
     /**
      * Removes an item from a specific [id]
      *
