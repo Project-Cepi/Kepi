@@ -47,10 +47,22 @@ interface Model<T> {
      *
      * @param item The generic to turn into data
      *
-     * @return A pair of ID to valid JSON data (json will be parsed to whatever)
-     * Reccomended to use kotlinx.serialization.
+     * @return The object as a String
+     * Recommended to use kotlinx.serialization.
      */
-    fun asData(item: T): Pair<String, String>
+    fun asObjectData(item: T): String
+
+    fun grabID(item: T): String
+
+    /**
+     * Turns object T into data w/ an ID
+     *
+     * @param item The generic to turn into data
+     *
+     * @return A pair of ID to valid JSON data (json will be parsed to whatever)
+     * Recommended to use kotlinx.serialization.
+     */
+    fun asData(item: T) = grabID(item) to asObjectData(item)
 
     /**
      * Data into object T
@@ -58,7 +70,7 @@ interface Model<T> {
      * @param data the JSON data to turn into a [T]
      *
      * @return The [T] object.
-     * Reccomended to use kotlinx.serialization.
+     * Recommended to use kotlinx.serialization.
      */
     fun asObject(data: String): T
 

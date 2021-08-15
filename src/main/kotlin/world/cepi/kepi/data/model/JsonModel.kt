@@ -17,6 +17,7 @@ open class JsonModel<T: @kotlinx.serialization.Serializable Any>(
     override val isSingleton: Boolean = false,
 ) : Model<T> {
 
-    override fun asData(item: T): Pair<String, String> = idGenerator(item) to Model.jsonParser.encodeToString(serializer, item)
+    override fun asObjectData(item: T): String = Model.jsonParser.encodeToString(serializer, item)
+    override fun grabID(item: T) = idGenerator(item)
     override fun asObject(data: String): T = Model.jsonParser.decodeFromString(serializer, data)
 }
