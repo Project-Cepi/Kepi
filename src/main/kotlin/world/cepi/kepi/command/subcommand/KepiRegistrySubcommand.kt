@@ -44,7 +44,7 @@ open class KepiRegistrySubcommand<T>(
         addSyntax(get, registeredItem) {
             get(this, context[registeredItem])
         }
-        
+
         addSyntax(remove, registeredItem) {
             dataHandler.erase(model, model.grabID(context[registeredItem]).also { removeCallback(this, it) })
         }
