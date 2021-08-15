@@ -1,10 +1,8 @@
 package world.cepi.kepi.command.subcommand
 
-import net.kyori.adventure.text.Component
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.exception.ArgumentSyntaxException
-import net.minestom.server.entity.Player
 import world.cepi.kepi.data.DataHandler
 import world.cepi.kepi.data.model.Model
 import world.cepi.kstom.command.SyntaxContext
@@ -21,25 +19,25 @@ open class KepiRegistrySubcommand<T>(
     val removeCallback: SyntaxContext.(String) -> Unit = { }
 ) : Command("registry") {
 
+    val newItem = ArgumentType.Word("newName").map { value ->
+        if (dataHandler.getAll(model).any { model.grabID(it.first) == value })
+            throw ArgumentSyntaxException("Registered name already exists", value, 1)
+
+        value
+    }
+
+    val registeredItem = ArgumentType.Word("registered").map { value ->
+        dataHandler.getAll(model).firstOrNull { model.grabID(it.first) == value }?.first
+            ?: throw ArgumentSyntaxException("Invalid mob", value, 1)
+    }.suggest {
+        dataHandler.getAll(model).map { model.grabID(it.first) }
+    }
+
     init {
 
         val add = "add".literal()
         val get = "get".literal()
         val remove = "remove".literal()
-
-        val newItem = ArgumentType.Word("newName").map { value ->
-            if (dataHandler.getAll(model).any { model.grabID(it.first) == value })
-                throw ArgumentSyntaxException("Registered name already exists", value, 1)
-
-            value
-        }
-
-        val registeredItem = ArgumentType.Word("registered").map { value ->
-            dataHandler.getAll(model).firstOrNull { model.grabID(it.first) == value }?.first
-                ?: throw ArgumentSyntaxException("Invalid mob", value, 1)
-        }.suggest {
-            dataHandler.getAll(model).map { model.grabID(it.first) }
-        }
 
         addSyntax(get, registeredItem) {
             get(this, context[registeredItem])

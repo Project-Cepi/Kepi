@@ -31,7 +31,7 @@ interface Configurable<V> {
      *
      * @param callback The [BiConsumer] callback
      */
-    fun onUpdate(callback: BiConsumer<V, V>)
+    fun onUpdate(callback: (V, V) -> Unit)
 
 }
 

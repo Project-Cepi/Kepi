@@ -104,7 +104,7 @@ object TranslationRegistry {
             }
 
         try {
-            Files.newInputStream(path).use { input ->
+            path.inputStream().use { input ->
                 val prop = Properties()
 
                 // load a properties file
