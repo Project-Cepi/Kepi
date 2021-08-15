@@ -14,10 +14,11 @@ open class KepiRegistrySubcommand<T>(
     val dataHandler: DataHandler,
     val model: Model<T>,
     val get: SyntaxContext.(T) -> Unit,
-    val add: SyntaxContext.() -> T?,
+    val add: SyntaxContext.(String) -> T?,
     val addCallback: SyntaxContext.(T) -> Unit = { },
-    val removeCallback: SyntaxContext.(String) -> Unit = { }
-) : Command("registry") {
+    val removeCallback: SyntaxContext.(String) -> Unit = { },
+    name: String = "registry"
+) : Command(name) {
 
     val newItem = ArgumentType.Word("newName").map { value ->
         if (dataHandler.getAll(model).any { model.grabID(it.first) == value })
@@ -48,7 +49,7 @@ open class KepiRegistrySubcommand<T>(
         }
 
         addSyntax(add, newItem) {
-            dataHandler[model] = add(this)?.also { addCallback(this, it) } ?: return@addSyntax
+            dataHandler[model] = add(this, context[newItem])?.also { addCallback(this, it) } ?: return@addSyntax
         }
     }
 
