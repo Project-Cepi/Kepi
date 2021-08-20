@@ -35,7 +35,7 @@ object TranslationCommand : Command("translation") {
 
             TranslationRegistry[it.split(":")[0], it.split(":")[1], "en_us"]
         }.also {
-            it.setCallback { sender, exception ->
+            it.setCallback { sender, _ ->
                 sender.sendFormattedMessage(Component.text("Invalid translation! Usage: namespace:some.key"))
             }
         }
