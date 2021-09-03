@@ -13,7 +13,7 @@ import kotlin.reflect.KClass
 open class KepiMetaSubcommand<T : Any>(
 
     /** The root sealed class of this command */
-    sealedRootClass: KClass<T>,
+    sealedRootClass: KClass<out T>,
 
     /**
      * The name of the command.
@@ -33,38 +33,4 @@ open class KepiMetaSubcommand<T : Any>(
     removeLambda: SyntaxContext.(KClass<out T>, String) -> Unit,
 
     vararg previousArgs: Argument<*>
-) : Command(name) {
-
-    init {
-        val set = "set".literal()
-        val remove = "remove".literal()
-
-        val metaClass = ArgumentType.Word("metaName").from(
-            *sealedRootClass.sealedSubclasses
-                .map { it.simpleName!!.lowercase().dropLast(dropString.length) }
-                .toTypedArray()
-        ).map { sealedClassName -> sealedRootClass.sealedSubclasses
-            .firstOrNull { it.simpleName!!.lowercase().dropLast(dropString.length) == sealedClassName }
-            ?: throw ArgumentSyntaxException("Meta is invalid", sealedClassName, 1)
-        }
-
-        sealedRootClass.sealedSubclasses.forEach { clazz ->
-            val syntaxes = generateSyntaxes(clazz)
-
-            val clazzArgumentName = clazz.simpleName!!.lowercase().dropLast(dropString.length)
-
-            syntaxes.applySyntax(this, *previousArgs, set, clazzArgumentName.literal()) { instance ->
-                addLambda(this, instance, clazzArgumentName)
-            }
-
-        }
-
-        addSyntax(*previousArgs, remove, metaClass) {
-
-            val clazzArgumentName = context[metaClass].simpleName!!.lowercase().dropLast(dropString.length)
-
-            removeLambda(this, context[metaClass], clazzArgumentName)
-        }
-    }
-
-}
+) : KepiMetaManualSubcommand<T>(sealedRootClass.sealedSubclasses, name, dropString, addLambda, removeLambda)
