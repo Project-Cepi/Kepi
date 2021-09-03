@@ -33,4 +33,4 @@ open class KepiMetaSubcommand<T : Any>(
     removeLambda: SyntaxContext.(KClass<out T>, String) -> Unit,
 
     vararg previousArgs: Argument<*>
-) : KepiMetaManualSubcommand<T>(sealedRootClass.sealedSubclasses, name, dropString, addLambda, removeLambda)
+) : KepiMetaManualSubcommand<T>(sealedRootClass.sealedSubclasses, name, dropString, addLambda, removeLambda, *previousArgs)
