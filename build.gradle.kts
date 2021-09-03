@@ -37,7 +37,7 @@ dependencies {
     compileOnly("com.github.Minestom:Minestom:2ef8e957a0")
 
     // Use kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.0.1")
+    compileOnly("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.2.2")
 
     // Add miniMessage
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
