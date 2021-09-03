@@ -14,6 +14,8 @@ open class KepiMetaManualSubcommand<T : Any>(
     /** All meta subclasses */
     allClasses: Collection<KClass<out T>>,
 
+    argumentPerClassGenerator: (KClass<out T>, String) -> Argument<*> = { _, className -> className.literal() },
+
     /**
      * The name of the command.
      *
@@ -52,8 +54,14 @@ open class KepiMetaManualSubcommand<T : Any>(
 
             val clazzArgumentName = clazz.simpleName!!.lowercase().dropLast(dropString.length)
 
-            syntaxes.applySyntax(this, *previousArgs, set, clazzArgumentName.literal()) { instance ->
+            val clazzArgument = argumentPerClassGenerator(clazz, clazzArgumentName)
+
+            syntaxes.applySyntax(this, *previousArgs, set, clazzArgument) { instance ->
                 addLambda(this, instance, clazzArgumentName)
+            }
+
+            addSyntax(*previousArgs, remove, clazzArgument) {
+                removeLambda(this, context[metaClass], clazzArgumentName)
             }
 
         }

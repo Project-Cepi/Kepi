@@ -15,6 +15,8 @@ open class KepiMetaSubcommand<T : Any>(
     /** The root sealed class of this command */
     sealedRootClass: KClass<out T>,
 
+    argumentPerClassGenerator: (KClass<out T>, String) -> Argument<*> = { _, className -> className.literal() },
+
     /**
      * The name of the command.
      *
@@ -33,4 +35,4 @@ open class KepiMetaSubcommand<T : Any>(
     removeLambda: SyntaxContext.(KClass<out T>, String) -> Unit,
 
     vararg previousArgs: Argument<*>
-) : KepiMetaManualSubcommand<T>(sealedRootClass.sealedSubclasses, name, dropString, addLambda, removeLambda, *previousArgs)
+) : KepiMetaManualSubcommand<T>(sealedRootClass.sealedSubclasses, argumentPerClassGenerator, name, dropString, addLambda, removeLambda, *previousArgs)
