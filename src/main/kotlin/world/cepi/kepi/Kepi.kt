@@ -1,11 +1,9 @@
 package world.cepi.kepi
 
 import net.minestom.server.extensions.Extension
-import world.cepi.kepi.command.KepiCommand
-import world.cepi.kepi.messages.translations.TranslationRegistry
+import world.cepi.kepi.command.*
 import world.cepi.kepi.command.HelpCommand
-import world.cepi.kepi.command.RefreshCommand
-import world.cepi.kepi.command.TranslationCommand
+import world.cepi.kepi.messages.translations.TranslationRegistry
 import world.cepi.kstom.Manager
 import world.cepi.kstom.command.register
 import world.cepi.kstom.command.unregister
@@ -25,6 +23,7 @@ class Kepi : Extension() {
         HelpCommand.register()
         TranslationCommand.register()
         RefreshCommand.register()
+        BlockHandlerCommand.register()
 
         logger.info("[Kepi] has been enabled!")
     }
@@ -35,6 +34,7 @@ class Kepi : Extension() {
         HelpCommand.unregister()
         TranslationCommand.unregister()
         RefreshCommand.unregister()
+        BlockHandlerCommand.unregister()
 
         logger.info("[Kepi] has been disabled!")
     }
