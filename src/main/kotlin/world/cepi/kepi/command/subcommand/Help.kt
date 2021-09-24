@@ -4,10 +4,9 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.Command
-import net.minestom.server.entity.Player
-import world.cepi.kepi.messages.translations.formatTranslableMessage
 import world.cepi.kepi.messages.translations.translableMessage
 import world.cepi.kstom.adventure.asMini
+import world.cepi.kstom.command.kommand.Kommand
 
 open class Help(
     val translationLambda: (sender: CommandSender) -> String,
@@ -46,19 +45,19 @@ open class Help(
  * @param translationLambda The messages to send to the player
  * @param shouldAddSubcommand If the subcommand should be added in the first place.
  */
-fun Command.applyHelp(
+fun Kommand.applyHelp(
     shouldAddSubcommand: Boolean = true,
     translationLambda: (CommandSender) -> String
 ) {
 
     val help = Help(translationLambda)
 
-    this.defaultExecutor = help.defaultExecutor
+    this.command.defaultExecutor = help.defaultExecutor
 
-    if (shouldAddSubcommand) this.addSubcommand(help)
+    if (shouldAddSubcommand) this.command.addSubcommand(help)
 }
 
-fun Command.applyHelp(
+fun Kommand.applyHelp(
     translationNamespace: String,
     translationKey: String,
     shouldAddSubcommand: Boolean = true,
@@ -66,7 +65,7 @@ fun Command.applyHelp(
 
     val help = Help(translationNamespace, translationKey)
 
-    this.defaultExecutor = help.defaultExecutor
+    this.command.defaultExecutor = help.defaultExecutor
 
-    if (shouldAddSubcommand) this.addSubcommand(help)
+    if (shouldAddSubcommand) this.command.addSubcommand(help)
 }

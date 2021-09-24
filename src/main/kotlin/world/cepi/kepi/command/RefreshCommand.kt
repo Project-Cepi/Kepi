@@ -1,14 +1,13 @@
 package world.cepi.kepi.command
 
-import net.minestom.server.command.builder.Command
 import net.minestom.server.entity.Player
+import world.cepi.kstom.command.kommand.Kommand
 
-object RefreshCommand : Command("refreshcommand") {
+object RefreshCommand : Kommand({
 
-    init {
-        setDefaultExecutor { sender, context ->
-            (sender as? Player)?.refreshCommands()
-        }
+    default {
+        (sender as? Player)?.refreshCommands()
     }
 
-}
+
+}, "refreshcommand")

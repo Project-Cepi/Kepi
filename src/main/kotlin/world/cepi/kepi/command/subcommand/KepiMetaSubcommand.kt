@@ -4,8 +4,6 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.exception.ArgumentSyntaxException
-import world.cepi.kstom.command.SyntaxContext
-import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.generation.generateSyntaxes
 import world.cepi.kstom.command.arguments.literal
 import kotlin.reflect.KClass
