@@ -1,13 +1,12 @@
 package world.cepi.kepi.data.namespace
 
-import org.junit.jupiter.api.Test
+import io.kotest.core.spec.style.StringSpec
 import world.cepi.kepi.data.DataNamespace
 
-class NamespaceTests {
+class NamespaceTests : StringSpec({
 
-    @Test
-    fun `namespace should be parsed properly`() {
+    "namespaces should be parsed properly" {
         assert(DataNamespace("hello", "world").toString() == "hello_world")
     }
 
-}
+})
