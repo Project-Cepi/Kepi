@@ -16,8 +16,7 @@ open class KepiRegistrySubcommand<T>(
     val addCallback: SyntaxContext.(T) -> Unit = { },
     val removeCallback: SyntaxContext.(String) -> Unit = { },
     name: String = "registry"
-) : Kommand({
-
+) : Kommand(name = name) {
     val newItem = ArgumentType.Word("newName").map { value ->
         if (dataHandler.getAll(model).any { model.grabID(it.first) == value })
             throw ArgumentSyntaxException("Registered name already exists", value, 1)
@@ -32,21 +31,21 @@ open class KepiRegistrySubcommand<T>(
         dataHandler.getAll(model).map { model.grabID(it.first) }
     }
 
-    val add by literal
-    val get by literal
-    val remove by literal
+    init {
+        val add by literal
+        val get by literal
+        val remove by literal
 
-    syntax(get, registeredItem) {
-        getFromRegistry(this, context[registeredItem])
+        syntax(get, registeredItem) {
+            getFromRegistry(this, context[registeredItem])
+        }
+
+        syntax(remove, registeredItem) {
+            dataHandler.erase(model, model.grabID(context[registeredItem]).also { removeCallback(this, it) })
+        }
+
+        syntax(add, newItem) {
+            dataHandler[model] = addToRegistry(this, context[newItem])?.also { addCallback(this, it) } ?: return@syntax
+        }
     }
-
-    syntax(remove, registeredItem) {
-        dataHandler.erase(model, model.grabID(context[registeredItem]).also { removeCallback(this, it) })
-    }
-
-    syntax(add, newItem) {
-        dataHandler[model] = addToRegistry(this, context[newItem])?.also { addCallback(this, it) } ?: return@syntax
-    }
-
-
-}, name)
+}
