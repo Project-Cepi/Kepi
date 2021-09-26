@@ -5,16 +5,17 @@ import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
 import net.minestom.server.command.builder.arguments.ArgumentType
-import net.minestom.server.entity.Player
+import net.minestom.server.instance.block.BlockHandler
+import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.kommand.Kommand
 
 object BlockHandlerCommand : Kommand({
 
+    val get by literal
+
     val relativeBlockPosition = ArgumentType.RelativeBlockPosition("blockpos")
 
-    syntax(relativeBlockPosition) {
-        val player = sender as? Player ?: return@syntax
-
+    syntax(get, relativeBlockPosition).onlyPlayers {
         val block = player.instance!!
             .getBlock((!relativeBlockPosition).from(player))
 
@@ -22,7 +23,7 @@ object BlockHandlerCommand : Kommand({
 
         if (handler == null) {
             player.sendMessage("No block handler found!")
-            return@syntax
+            return@onlyPlayers
         }
 
         player.sendMessage(
@@ -46,5 +47,15 @@ object BlockHandlerCommand : Kommand({
 
         )
     }
+
+    val remove by literal
+
+    syntax(remove, relativeBlockPosition) {
+        val block = player.instance!!
+            .getBlock((!relativeBlockPosition).from(player))
+
+        player.instance!!.setBlock((!relativeBlockPosition).from(player), block.withHandler(BlockHandler.Dummy.get(block.namespace().namespace())))
+    }
+
 }, "blockhandler")
 

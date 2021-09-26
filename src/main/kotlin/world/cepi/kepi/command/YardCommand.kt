@@ -13,7 +13,7 @@ object YardCommand : Kommand({
             Component.text("Yard (general documentation on all of cepi: ")
                 .append(
                     Component.text("https://project-cepi.github.io", NamedTextColor.YELLOW)
-                        .clickEvent(ClickEvent.openUrl("https://proejct-cepi.github.io"))
+                        .clickEvent(ClickEvent.openUrl("https://project-cepi.github.io"))
                 )
                 .append(Component.text(")", NamedTextColor.GRAY))
         )
