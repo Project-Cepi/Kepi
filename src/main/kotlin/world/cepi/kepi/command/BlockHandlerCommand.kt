@@ -57,5 +57,20 @@ object BlockHandlerCommand : Kommand({
         player.instance!!.setBlock((!relativeBlockPosition).from(player), block.withHandler(BlockHandler.Dummy.get(block.namespace().namespace())))
     }
 
+    val change by literal
+
+    val block = ArgumentType.BlockState("block")
+    syntax(change, relativeBlockPosition, block) {
+
+        val currentBlock = player.instance!!.getBlock((!relativeBlockPosition).from(player))
+
+        player.instance!!.setBlock(
+            (!relativeBlockPosition).from(player),
+            (!block)
+                .withNbt(currentBlock.nbt())
+                .withHandler(currentBlock.handler())
+        )
+    }
+
 }, "blockhandler")
 
