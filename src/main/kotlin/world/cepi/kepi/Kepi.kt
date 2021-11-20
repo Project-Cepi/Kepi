@@ -1,15 +1,19 @@
 package world.cepi.kepi
 
+import net.kyori.adventure.text.Component
 import net.minestom.server.extensions.Extension
 import world.cepi.kepi.command.*
 import world.cepi.kepi.messages.translations.TranslationRegistry
 import world.cepi.kstom.Manager
+import world.cepi.kstom.command.arguments.generation.CallbackGenerator
 import world.cepi.kstom.command.register
 import world.cepi.kstom.command.unregister
 
 class Kepi : Extension() {
 
     override fun initialize() {
+
+        CallbackGenerator.errorSymbol = Component.text("\uE006")
 
         try {
             TranslationRegistry.grab()

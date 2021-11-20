@@ -42,7 +42,7 @@ dependencies {
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:64a3b64686")
+    compileOnly("com.github.Project-Cepi:KStom:b20a9c0e9f")
 }
 
 tasks.withType<Test> {
