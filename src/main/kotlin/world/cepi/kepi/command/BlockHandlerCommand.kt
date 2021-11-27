@@ -6,6 +6,7 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.instance.block.BlockHandler
+import world.cepi.kepi.command.subcommand.applyHelp
 import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.kommand.Kommand
 
@@ -14,6 +15,22 @@ object BlockHandlerCommand : Kommand({
     val get by literal
 
     val relativeBlockPosition = ArgumentType.RelativeBlockPosition("blockpos")
+
+    applyHelp {
+        """
+            Blockhandler is a small utility command for handling
+            any interaction that blocks may do to players.
+            
+            <yellow>/blockhandler change (position) (blocktype)
+            Change the block type at a position
+            
+            <yellow>/blockhandler remove (position)
+            Removes the blockhandler at a position
+            
+            <yellow>/blockhandler get (position)
+            Gets all data of a block at a position
+        """.trimIndent()
+    }
 
     syntax(get, relativeBlockPosition).onlyPlayers {
         val block = player.instance!!
