@@ -16,8 +16,11 @@ object AddCreationalItem {
             return CreationalItemResult.MainHandItemResult
         }
 
+        // The player is holding an item + there is space left, take the current item and place it
+        // in the remaining slot.
         val index = player.inventory.itemStacks.indexOfFirst { it.isAir }
-        player.inventory.setItemStack(index, itemStack)
+        player.inventory.setItemStack(index, player.itemInMainHand)
+        player.itemInMainHand = itemStack
 
         return CreationalItemResult.InInventoryItemResult(index)
     }
