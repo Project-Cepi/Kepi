@@ -43,6 +43,9 @@ dependencies {
 
     // implement KStom
     compileOnly("com.github.Project-Cepi:KStom:b20a9c0e9f")
+
+    // Add Hotbarty
+    compileOnly("com.github.Project-Cepi:Hotbarty:2318169907")
 }
 
 tasks.withType<Test> {
