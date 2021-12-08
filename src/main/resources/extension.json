@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "dependencies": [
     "KStom",
-    "Hotbarty"
+    "Gooey"
   ],
   "meta": {
     "downloadURL": "https://github.com/Project-Cepi/Kepi/releases/download/latest/kepi-1.0.0-all.jar"
