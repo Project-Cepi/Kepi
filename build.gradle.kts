@@ -12,6 +12,7 @@ plugins {
 repositories {
     // Use mavenCentral
     mavenCentral()
+    jcenter()
 
     maven(url = "https://jitpack.io")
     maven(url = "https://repo.spongepowered.org/maven")
@@ -49,6 +50,9 @@ dependencies {
 
     // Add Subfuzzy
     compileOnly("com.github.Project-Cepi:Subfuzzy:2f6500da34")
+
+    // Add fuzzywuzzy
+    implementation("me.xdrop:fuzzywuzzy:1.3.1")
 }
 
 tasks.withType<Test> {
