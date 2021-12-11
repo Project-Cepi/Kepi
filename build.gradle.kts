@@ -46,6 +46,9 @@ dependencies {
 
     // Add Hotbarty
     compileOnly("com.github.Project-Cepi:Gooey:f083a23ef5")
+
+    // Add Subfuzzy
+    compileOnly("com.github.Project-Cepi:Subfuzzy:2f6500da34")
 }
 
 tasks.withType<Test> {
