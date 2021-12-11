@@ -6,13 +6,16 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.instance.block.BlockHandler
+import world.cepi.kepi.KFuzz
 import world.cepi.kepi.command.subcommand.applyHelp
-import world.cepi.kstom.command.arguments.literal
+import world.cepi.kepi.literalFuzz
 import world.cepi.kstom.command.kommand.Kommand
 
 object BlockHandlerCommand : Kommand({
 
-    val get by literal
+    val fuzz = KFuzz("blockhandler", "get", "change", "remove")
+
+    val get by literalFuzz(fuzz)
 
     val relativeBlockPosition = ArgumentType.RelativeBlockPosition("blockpos")
 
@@ -65,7 +68,7 @@ object BlockHandlerCommand : Kommand({
         )
     }
 
-    val remove by literal
+    val remove by literalFuzz(fuzz)
 
     syntax(remove, relativeBlockPosition) {
         val block = player.instance!!
@@ -74,7 +77,7 @@ object BlockHandlerCommand : Kommand({
         player.instance!!.setBlock((!relativeBlockPosition).from(player), block.withHandler(BlockHandler.Dummy.get(block.namespace().namespace())))
     }
 
-    val change by literal
+    val change by literalFuzz(fuzz)
 
     val block = ArgumentType.BlockState("block")
     syntax(change, relativeBlockPosition, block) {

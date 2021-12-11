@@ -49,7 +49,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:Gooey:f083a23ef5")
 
     // Add Subfuzzy
-    compileOnly("com.github.Project-Cepi:Subfuzzy:2f6500da34")
+    compileOnly("com.github.Project-Cepi:Subfuzzy:262c7b172e")
 
     // Add fuzzywuzzy
     implementation("me.xdrop:fuzzywuzzy:1.3.1")
