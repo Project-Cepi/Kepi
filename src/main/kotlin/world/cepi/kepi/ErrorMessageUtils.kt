@@ -8,7 +8,8 @@ const val errorUnicode = "\uE006"
 
 fun CommandSender.missingArgumentMessage(vararg arguments: String) {
     sendMessage(
-        Component.text("Missing ", NamedTextColor.GRAY)
+        Component.text(errorUnicode)
+            .append(Component.text(" Missing ", NamedTextColor.GRAY))
             .append(Component.text(arguments.joinToString(", "), NamedTextColor.RED))
             .append(Component.text(" argument${if (arguments.size == 1) "" else "s"}.", NamedTextColor.GRAY))
     )

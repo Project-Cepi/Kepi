@@ -1,20 +1,17 @@
 package world.cepi.kepi.messages.translations
 
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.TextReplacementConfig
-import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.CommandSender
 import net.minestom.server.entity.Player
 import world.cepi.kepi.messages.formatPercent
-import java.lang.Exception
-import java.util.*
+import world.cepi.kstom.adventure.asMini
 
 fun CommandSender.formatTranslableMessage(
     namespace: String = "common",
     key: String,
     vararg params: Component = arrayOf()
 ): Component =
-    Component.text(this.translableMessage(namespace, key)).formatPercent(*params)
+    this.translableMessage(namespace, key).asMini().formatPercent(*params)
 
 fun CommandSender.translableMessage(
     namespace: String = "common",
