@@ -7,8 +7,8 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.arguments.ArgumentLiteral
-import world.cepi.example.SubFuzz
-import world.cepi.example.attatchFuzz
+import world.cepi.subfuzzy.SubFuzz
+import world.cepi.subfuzzy.attatchFuzz
 import kotlin.reflect.KProperty
 
 fun CommandSender.sendFuzzyMessage(prefix: String, input: String, possibility: String) {
