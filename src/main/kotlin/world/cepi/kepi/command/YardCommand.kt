@@ -10,7 +10,7 @@ object YardCommand : Kommand({
 
     default {
         sender.sendFormattedMessage(
-            Component.text("Yard (general documentation on all of cepi: ")
+            Component.text("Yard (general documentation on all of cepi): ")
                 .append(
                     Component.text("https://project-cepi.github.io", NamedTextColor.YELLOW)
                         .clickEvent(ClickEvent.openUrl("https://project-cepi.github.io"))
