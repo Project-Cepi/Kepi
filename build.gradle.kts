@@ -51,6 +51,9 @@ dependencies {
     // Add Subfuzzy
     compileOnly("com.github.Project-Cepi:Subfuzzy:3bd3e24424")
 
+    // Use mworlza's canvas
+    implementation("com.github.Project-Cepi:canvas:d25c5c27f3")
+
     // Add fuzzywuzzy
     implementation("me.xdrop:fuzzywuzzy:1.3.1")
 }
