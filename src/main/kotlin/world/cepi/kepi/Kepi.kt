@@ -33,7 +33,7 @@ class Kepi : Extension() {
         InventoryManager[8] = menuItem
         eventNode.listenOnly<PlayerUseItemEvent> {
             if (itemStack == menuItem) {
-                player.canvas.render { menuUI() }
+                player.canvas.render { menuUI(player) }
             }
         }
 

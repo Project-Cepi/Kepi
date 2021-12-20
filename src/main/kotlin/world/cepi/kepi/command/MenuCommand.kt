@@ -6,6 +6,6 @@ import world.cepi.kstom.command.kommand.Kommand
 
 object MenuCommand : Kommand({
     default {
-        player.canvas.render { menuUI() }
+        player.canvas.render { menuUI(player) }
     }
 }, "menu")
