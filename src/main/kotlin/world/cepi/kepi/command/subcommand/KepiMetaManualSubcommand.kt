@@ -3,6 +3,7 @@ package world.cepi.kepi.command.subcommand
 import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.exception.ArgumentSyntaxException
+import world.cepi.kstom.command.arguments.generation.argumentsFromClass
 import world.cepi.kstom.command.arguments.generation.generateSyntaxes
 import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.kommand.Kommand
@@ -47,7 +48,7 @@ open class KepiMetaManualSubcommand<T : Any>(
     }
 
     allClasses.forEach { clazz ->
-        val syntaxes = generateSyntaxes(clazz)
+        val syntaxes = argumentsFromClass(clazz)
 
         val clazzArgumentName = clazz.simpleName!!.lowercase().dropLast(dropString.length)
 

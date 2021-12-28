@@ -43,7 +43,7 @@ dependencies {
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:6bbc7aacce")
+    compileOnly("com.github.Project-Cepi:KStom:61d4c86234")
 
     // Add Hotbarty
     compileOnly("com.github.Project-Cepi:Gooey:f083a23ef5")
