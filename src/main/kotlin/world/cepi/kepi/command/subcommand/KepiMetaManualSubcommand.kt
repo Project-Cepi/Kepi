@@ -3,6 +3,7 @@ package world.cepi.kepi.command.subcommand
 import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.exception.ArgumentSyntaxException
+import org.slf4j.LoggerFactory
 import world.cepi.kstom.command.arguments.generation.argumentsFromClass
 import world.cepi.kstom.command.arguments.generation.generateSyntaxes
 import world.cepi.kstom.command.arguments.literal
@@ -35,6 +36,8 @@ open class KepiMetaManualSubcommand<T : Any>(
     vararg previousArgs: Argument<*>
 ) : Kommand({
 
+    val logger = LoggerFactory.getLogger(KepiMetaManualSubcommand::class.java)
+
     val set by literal
     val remove by literal
 
@@ -48,20 +51,23 @@ open class KepiMetaManualSubcommand<T : Any>(
     }
 
     allClasses.forEach { clazz ->
-        val syntaxes = argumentsFromClass(clazz)
+        try {
+            val syntaxes = argumentsFromClass(clazz)
 
-        val clazzArgumentName = clazz.simpleName!!.lowercase().dropLast(dropString.length)
+            val clazzArgumentName = clazz.simpleName!!.lowercase().dropLast(dropString.length)
 
-        val clazzArgument = argumentPerClassGenerator(clazz, clazzArgumentName)
+            val clazzArgument = argumentPerClassGenerator(clazz, clazzArgumentName)
 
-        syntaxes.applySyntax(this, *previousArgs, set, clazzArgument) { instance ->
-            addLambda(this, instance, clazzArgumentName)
+            syntaxes.applySyntax(this, *previousArgs, set, clazzArgument) { instance ->
+                addLambda(this, instance, clazzArgumentName)
+            }
+
+            syntax(*previousArgs, remove, clazzArgument) {
+                removeLambda(this, context[metaClass], clazzArgumentName)
+            }
+        } catch (exception: Exception) {
+            logger.warn("Could not generate class syntaxes for $clazz", exception)
         }
-
-        syntax(*previousArgs, remove, clazzArgument) {
-            removeLambda(this, context[metaClass], clazzArgumentName)
-        }
-
     }
 
     syntax(*previousArgs, remove, metaClass) {
