@@ -66,7 +66,7 @@ open class KepiMetaManualSubcommand<T : Any>(
                 removeLambda(this, context[metaClass], clazzArgumentName)
             }
         } catch (exception: Exception) {
-            logger.warn("Could not generate class syntaxes for $clazz", exception)
+            logger.warn("Could not generate class syntaxes for $clazz: ${exception.localizedMessage}")
         }
     }
 
