@@ -2,6 +2,7 @@ package world.cepi.kepi.messages.translations
 
 import world.cepi.kepi.SystemLoadStatus
 import world.cepi.kstom.Manager
+import world.cepi.kstom.util.log
 import java.io.BufferedInputStream
 import java.io.IOException
 import java.net.URL
@@ -73,9 +74,9 @@ object TranslationRegistry {
             loadingStatus = SystemLoadStatus.ENABLED
 
         } catch(exception: UnknownHostException) {
-            Manager.extension.getExtension("Kepi")?.logger?.warn("Internet down (${exception.message}). Translations will not work.")
+            Manager.extension.getExtension("Kepi")?.log?.warn("Internet down (${exception.message}). Translations will not work.")
         } catch (exception: Exception) {
-            Manager.extension.getExtension("Kepi")?.logger?.error("An unexpected error occured loading translations.")
+            Manager.extension.getExtension("Kepi")?.log?.error("An unexpected error occured loading translations.")
             Manager.exception.handleException(exception)
             loadingStatus = SystemLoadStatus.ERROR
         }

@@ -17,10 +17,12 @@ import world.cepi.kstom.command.register
 import world.cepi.kstom.command.unregister
 import world.cepi.kstom.event.listenOnly
 import world.cepi.kstom.item.item
+import world.cepi.kstom.util.log
+import world.cepi.kstom.util.node
 
 class Kepi : Extension() {
 
-    override fun initialize() {
+    override fun initialize(): LoadStatus {
 
         val menuItem = item(Material.NETHER_STAR) {
             displayName(
@@ -31,7 +33,7 @@ class Kepi : Extension() {
 
 
         InventoryManager[8] = menuItem
-        eventNode.listenOnly<PlayerUseItemEvent> {
+        node.listenOnly<PlayerUseItemEvent> {
             if (itemStack == menuItem) {
                 player.canvas.render { menuUI(player) }
             }
@@ -42,7 +44,7 @@ class Kepi : Extension() {
         try {
             TranslationRegistry.grab()
         } catch (exception: Exception) {
-            logger.error("An unexpected error occured loading translations.")
+            log.error("An unexpected error occured loading translations.")
             Manager.exception.handleException(exception)
         }
 
@@ -54,7 +56,9 @@ class Kepi : Extension() {
         YardCommand.register()
         MenuCommand.register()
 
-        logger.info("[Kepi] has been enabled!")
+        log.info("[Kepi] has been enabled!")
+
+        return LoadStatus.SUCCESS
     }
 
     override fun terminate() {
@@ -67,6 +71,6 @@ class Kepi : Extension() {
         YardCommand.unregister()
         MenuCommand.unregister()
 
-        logger.info("[Kepi] has been disabled!")
+        log.info("[Kepi] has been disabled!")
     }
 }

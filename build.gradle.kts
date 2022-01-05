@@ -34,7 +34,7 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:4.6.3")
 
     // Compile Minestom into project
-    compileOnly("com.github.Minestom:Minestom:74564198ea")
+    compileOnly("com.github.Minestom:Minestom:4ee5cbe424")
 
     // Use kotlinx serialization
     compileOnly("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.3.1")
@@ -43,7 +43,7 @@ dependencies {
     implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:61d4c86234")
+    compileOnly("com.github.Project-Cepi:KStom:05b5e1f2a1")
 
     // Add Hotbarty
     compileOnly("com.github.Project-Cepi:Gooey:f083a23ef5")
