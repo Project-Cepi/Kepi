@@ -4,6 +4,8 @@ import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.exception.ArgumentSyntaxException
 import org.slf4j.LoggerFactory
+import world.cepi.kstom.command.arguments.generation.ClassArgumentGenerator
+import world.cepi.kstom.command.arguments.generation.CustomArgumentGenerator
 import world.cepi.kstom.command.arguments.generation.argumentsFromClass
 import world.cepi.kstom.command.arguments.generation.generateSyntaxes
 import world.cepi.kstom.command.arguments.literal
@@ -52,7 +54,7 @@ open class KepiMetaManualSubcommand<T : Any>(
 
     allClasses.forEach { clazz ->
         try {
-            val syntaxes = argumentsFromClass(clazz)
+            val syntaxes = ClassArgumentGenerator(clazz)
 
             val clazzArgumentName = clazz.simpleName!!.lowercase().dropLast(dropString.length)
 
