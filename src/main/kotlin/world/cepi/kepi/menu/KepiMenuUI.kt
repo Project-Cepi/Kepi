@@ -4,6 +4,7 @@ import com.mattworzala.canvas.fragment
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.entity.Player
+import net.minestom.server.entity.PlayerSkin
 import net.minestom.server.item.Material
 import net.minestom.server.item.metadata.PlayerHeadMeta
 import world.cepi.kstom.adventure.noItalic
@@ -16,7 +17,8 @@ fun menuUI(player: Player) = fragment(9, 6) {
     item(13, item(Material.PLAYER_HEAD) {
         val builder = this as PlayerHeadMeta.Builder
 
-        builder.playerSkin(player.skin)
+        builder.skullOwner(player.uuid)
+        builder.playerSkin(PlayerSkin.fromUuid(player.uuid.toString()))
 
         displayName(Component.text(player.username, NamedTextColor.BLUE).noItalic())
         lore(
