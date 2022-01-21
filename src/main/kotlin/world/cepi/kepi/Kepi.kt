@@ -28,6 +28,7 @@ class Kepi : Extension() {
             displayName(
                 Component.text("Menu", NamedTextColor.LIGHT_PURPLE)
                     .decoration(TextDecoration.ITALIC, false)
+                    .append(Component.text(" (Right click to open)", NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))
             )
         }
 
