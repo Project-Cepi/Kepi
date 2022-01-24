@@ -55,7 +55,7 @@ dependencies {
     implementation("com.github.Project-Cepi:canvas:d3d937c54d")
 
     // Add fuzzywuzzy
-    implementation("me.xdrop:fuzzywuzzy:1.3.1")
+    implementation("me.xdrop:fuzzywuzzy:1.4.0")
 }
 
 tasks.withType<Test> {
