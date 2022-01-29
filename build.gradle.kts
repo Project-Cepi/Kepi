@@ -31,7 +31,7 @@ dependencies {
 
     // Use the kotest library
     testImplementation("io.kotest:kotest-assertions-core:4.6.3")
-    testImplementation("io.kotest:kotest-runner-junit5:4.6.3")
+    testImplementation("io.kotest:kotest-runner-junit5:4.6.4")
 
     // Compile Minestom into project
     compileOnly("com.github.Minestom:Minestom:4ee5cbe424")
@@ -55,7 +55,7 @@ dependencies {
     implementation("com.github.Project-Cepi:canvas:d3d937c54d")
 
     // Add fuzzywuzzy
-    implementation("me.xdrop:fuzzywuzzy:1.3.1")
+    implementation("me.xdrop:fuzzywuzzy:1.4.0")
 }
 
 tasks.withType<Test> {
