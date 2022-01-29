@@ -2,8 +2,10 @@ package world.cepi.kepi.command.subcommand
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.Command
+import net.minestom.server.utils.StringUtils
 import world.cepi.kepi.messages.translations.translableMessage
 import world.cepi.kstom.adventure.asMini
 import world.cepi.kstom.command.kommand.Kommand
@@ -21,19 +23,19 @@ open class Help(
     ): this({ sender -> sender.translableMessage(namespace, key) })
 
     companion object {
-        const val arm = "─"
-        const val armLength = 5
+        const val arm = StringUtils.SPACE
+        const val armLength = 15
     }
 
     init {
         setDefaultExecutor { sender, _ ->
-            sender.sendMessage(Component.text(arm.repeat(armLength), NamedTextColor.DARK_GRAY))
+            sender.sendMessage(Component.text(arm.repeat(armLength), NamedTextColor.DARK_GRAY).decorate(TextDecoration.STRIKETHROUGH))
 
             translationLambda(sender).trim().split("\n").forEach {
                 sender.sendMessage(Component.text().color(NamedTextColor.GRAY).append(it.asMini()))
             }
 
-            sender.sendMessage(Component.text(arm.repeat(armLength), NamedTextColor.DARK_GRAY))
+            sender.sendMessage(Component.text(arm.repeat(armLength), NamedTextColor.DARK_GRAY).decorate(TextDecoration.STRIKETHROUGH))
         }
     }
 
