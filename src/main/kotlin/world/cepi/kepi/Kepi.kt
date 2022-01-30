@@ -26,7 +26,7 @@ class Kepi : Extension() {
 
         val menuItem = item(Material.NETHER_STAR) {
             displayName(
-                Component.text("Menu", NamedTextColor.LIGHT_PURPLE)
+                Component.text("Menu", NamedTextColor.BLUE)
                     .decoration(TextDecoration.ITALIC, false)
                     .append(Component.text(" (Right click to open)", NamedTextColor.GRAY).decorate(TextDecoration.ITALIC))
             )
