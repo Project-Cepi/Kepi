@@ -1,9 +1,12 @@
 package world.cepi.kepi.data.database
 
+import net.minestom.server.utils.NamespaceID
+import world.cepi.kepi.data.DataNamespace
+
 /**
  * Represents a simple database handler. Can be hooked to anything -- local file storage, local dbs, online dbs, etc.
  */
-interface DatabaseHandler {
+abstract class DatabaseHandler(val namespace: DataNamespace) : AutoCloseable {
 
     /**
      * Puts data at a namespace + id
@@ -11,14 +14,14 @@ interface DatabaseHandler {
      * @param key the key of the data
      * @param data The data as JSON (string)
      */
-    operator fun set(key: String, data: String)
+    abstract operator fun set(key: String, data: String)
 
     /**
      * Erase data from a namespace + id
      *
      * @param key the key of the data
      */
-    fun erase(key: String)
+    abstract fun erase(key: String)
 
     /**
      * Grabs data from a namespace + id
@@ -27,6 +30,6 @@ interface DatabaseHandler {
      *
      * @return The data at that space, null if not exists
      */
-    operator fun get(key: String): String?
+    abstract operator fun get(key: String): String?
 
 }

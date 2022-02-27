@@ -23,5 +23,5 @@ class MultipleTests : StringSpec({
     }
 
 }) {
-    object TestDataHandler: DataHandlerFactory({ MapDatabase() })
+    object TestDataHandler: DataHandlerFactory({ MapDatabase(it) })
 }

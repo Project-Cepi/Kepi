@@ -1,5 +1,6 @@
 package world.cepi.kepi.data.database.implementations
 
+import world.cepi.kepi.data.DataNamespace
 import world.cepi.kepi.data.database.DatabaseHandler
 import java.util.concurrent.ConcurrentHashMap
 
@@ -7,8 +8,13 @@ import java.util.concurrent.ConcurrentHashMap
  * Database located purely in memory. Should be used for testing only.
  */
 class MapDatabase(
+    dataNamespace: DataNamespace,
     val map: ConcurrentHashMap<String, String> = ConcurrentHashMap()
-) : DatabaseHandler {
+) : DatabaseHandler(dataNamespace) {
+
+    override fun close() {
+
+    }
 
     /** String (namespace) that stores (namespaces) paired to string (data) */
 
