@@ -40,7 +40,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.3.1")
 
     // Add miniMessage
-    implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
+    implementation("net.kyori:adventure-text-minimessage:4.10.1")
 
     // implement KStom
     compileOnly("com.github.Project-Cepi:KStom:1171ec2cf7")
