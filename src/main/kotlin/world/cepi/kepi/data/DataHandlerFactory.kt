@@ -18,10 +18,14 @@ open class DataHandlerFactory(val databaseHandlerFactory: (DataNamespace) -> Dat
         const val mainDataHandler = "main"
     }
 
-    private val handlers: ConcurrentHashMap<DataNamespace, DataHandler> = ConcurrentHashMap()
+    internal val handlers: ConcurrentHashMap<DataNamespace, DataHandler> = ConcurrentHashMap()
 
     operator fun get(namespace: DataNamespace): DataHandler = if (!handlers.containsKey(namespace)) object : DataHandler {
         override var databaseHandler: DatabaseHandler = databaseHandlerFactory(namespace)
+
+        override fun close() {
+            databaseHandler.close()
+        }
     } else handlers[namespace]!!
 
     val main by lazy { this[mainDataHandler.asNamespace()] }

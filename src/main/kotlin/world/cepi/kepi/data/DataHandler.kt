@@ -9,7 +9,7 @@ import java.lang.Integer.parseInt
  *
  * Allows for manipulation of data via a [Model]
  */
-interface DataHandler {
+interface DataHandler : AutoCloseable {
 
     /**
      * Represents the [DatabaseHandler] this [DataHandler] uses

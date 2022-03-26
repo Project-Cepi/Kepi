@@ -45,9 +45,6 @@ dependencies {
     // implement KStom
     compileOnly("com.github.Project-Cepi:KStom:1171ec2cf7")
 
-    // Add RocksDB
-    implementation("org.rocksdb:rocksdbjni:5.8.0")
-
     // Add Hotbarty
     compileOnly("com.github.Project-Cepi:Gooey:f083a23ef5")
 
