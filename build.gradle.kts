@@ -39,11 +39,11 @@ dependencies {
     // Use kotlinx serialization
     compileOnly("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.3.1")
 
-    // Add miniMessage
-    implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
-
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:1171ec2cf7")
+    compileOnly("com.github.Project-Cepi:KStom:15bab227a2")
+
+    // Add MiniMessage
+    compileOnly("net.kyori:adventure-text-minimessage:4.2.0-SNAPSHOT")
 
     // Add Hotbarty
     compileOnly("com.github.Project-Cepi:Gooey:f083a23ef5")

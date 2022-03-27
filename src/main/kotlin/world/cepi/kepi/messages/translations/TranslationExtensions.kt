@@ -11,7 +11,8 @@ fun CommandSender.formatTranslableMessage(
     key: String,
     vararg params: Component = arrayOf()
 ): Component =
-    this.translableMessage(namespace, key).asMini().formatPercent(*params)
+    this.translableMessage(namespace, key)
+        .asMini().formatPercent(*params)
 
 fun CommandSender.translableMessage(
     namespace: String = "common",
