@@ -30,8 +30,8 @@ dependencies {
     compileOnly(kotlin("reflect"))
 
     // Use the kotest library
-    testImplementation("io.kotest:kotest-assertions-core:4.6.3")
-    testImplementation("io.kotest:kotest-runner-junit5:4.6.4")
+    testImplementation("io.kotest:kotest-assertions-core:5.2.1")
+    testImplementation("io.kotest:kotest-runner-junit5:5.2.1")
 
     // Compile Minestom into project
     compileOnly("com.github.Minestom:Minestom:4ee5cbe424")
@@ -40,10 +40,10 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.3.1")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:15bab227a2")
+    compileOnly("com.github.Project-Cepi:KStom:1229e45e12")
 
     // Add MiniMessage
-    compileOnly("net.kyori:adventure-text-minimessage:4.2.0-SNAPSHOT")
+    compileOnly("net.kyori:adventure-text-minimessage:4.10.1")
 
     // Add Hotbarty
     compileOnly("com.github.Project-Cepi:Gooey:f083a23ef5")
