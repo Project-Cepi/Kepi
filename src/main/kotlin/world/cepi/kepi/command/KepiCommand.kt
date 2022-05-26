@@ -31,7 +31,7 @@ object KepiCommand : Kommand({
             Component.text("Click to copy your player data", NamedTextColor.GRAY)
                 .clickEvent(
                     ClickEvent.copyToClipboard(
-                        player.getTag(Tag.NBT)?.toSNBT() ?: "{}"
+                        player.tagHandler().asCompound().toSNBT()
                     )
                 )
         )

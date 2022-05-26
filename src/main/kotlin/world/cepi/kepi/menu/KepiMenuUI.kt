@@ -9,17 +9,14 @@ import net.minestom.server.entity.PlayerSkin
 import net.minestom.server.item.Material
 import net.minestom.server.item.metadata.PlayerHeadMeta
 import world.cepi.kstom.adventure.noItalic
-import world.cepi.kstom.item.item
 
 fun menuUI(player: Player) = fragment(9, 6) {
 
     this.inventory.title = Component.text("Menu", NamedTextColor.BLUE)
 
-    item(4, item(Material.PLAYER_HEAD) {
-        val builder = this as PlayerHeadMeta.Builder
-
-        builder.skullOwner(player.uuid)
-        builder.playerSkin(PlayerSkin.fromUuid(player.uuid.toString()))
+    item(4, world.cepi.kstom.item.item<PlayerHeadMeta.Builder, PlayerHeadMeta>(Material.PLAYER_HEAD) {
+        skullOwner(player.uuid)
+        playerSkin(PlayerSkin.fromUuid(player.uuid.toString()))
 
         displayName(Component.text(player.username, NamedTextColor.BLUE).noItalic())
         lore(

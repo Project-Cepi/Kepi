@@ -20,6 +20,7 @@ import world.cepi.kstom.command.arguments.generation.CallbackGenerator
 import world.cepi.kstom.command.register
 import world.cepi.kstom.command.unregister
 import world.cepi.kstom.event.listenOnly
+import world.cepi.kstom.item.displayName
 import world.cepi.kstom.item.item
 import world.cepi.kstom.util.log
 import world.cepi.kstom.util.node

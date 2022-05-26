@@ -35,7 +35,7 @@ object BlockHandlerCommand : Kommand({
         """.trimIndent()
     }
 
-    syntax(get, relativeBlockPosition).onlyPlayers {
+    syntax(get, relativeBlockPosition) {
         val block = player.instance!!
             .getBlock((!relativeBlockPosition).from(player))
 
@@ -43,7 +43,7 @@ object BlockHandlerCommand : Kommand({
 
         if (handler == null) {
             player.sendMessage("No block handler found!")
-            return@onlyPlayers
+            return@syntax
         }
 
         player.sendMessage(
@@ -66,7 +66,7 @@ object BlockHandlerCommand : Kommand({
                 }
 
         )
-    }
+    }.onlyPlayers()
 
     val remove by literalFuzz(fuzz)
 

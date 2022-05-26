@@ -34,13 +34,13 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:5.2.1")
 
     // Compile Minestom into project
-    compileOnly("com.github.Minestom:Minestom:4ee5cbe424")
+    compileOnly("com.github.Minestom", "Minestom", "7867313290")
 
     // Use kotlinx serialization
     compileOnly("org.jetbrains.kotlinx", "kotlinx-serialization-json", "1.3.1")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:1229e45e12")
+    compileOnly("com.github.Project-Cepi:KStom:af120b5455")
 
     // Add MiniMessage
     compileOnly("net.kyori:adventure-text-minimessage:4.10.1")
