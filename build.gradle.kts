@@ -1,7 +1,7 @@
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    kotlin("jvm") version "1.6.0"
-    kotlin("plugin.serialization") version "1.5.31"
+    kotlin("jvm") version "1.7.21"
+    kotlin("plugin.serialization") version "1.7.21"
     id("com.github.johnrengelman.shadow") version "7.0.0"
     `maven-publish`
 
